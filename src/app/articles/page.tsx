@@ -4,7 +4,6 @@ import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { formatDate } from "@/lib/formatDate";
 import { ArticleWithSlug, getAllArticles } from "@/lib/articles";
-export const runtime = 'edge';
 
 export const metadata: Metadata = {
   title: 'Articles',
