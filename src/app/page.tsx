@@ -14,6 +14,8 @@ import logoMLC from '@/images/logos/mlc.svg'
 import logoXev from '@/images/logos/xev.svg'
 import logoBloom from '@/images/logos/bloom.svg'
 import logoWeblaunch from '@/images/logos/weblaunch.svg'
+import mlcAppImage from '@/images/mlc-apps.png'
+import wodappImage from '@/images/wodapp.png'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
@@ -21,6 +23,8 @@ import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import '../styles/global.scss';
+import { ProjectExcerpt } from "@/components/ProjectExcerpt";
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -113,14 +117,16 @@ function Newsletter() {
   return (
     <form
       action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+      className="my-auto lg:basis-7/12 py-6 dark:border-zinc-700/40 lg:order-0 order-1"
     >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
+      <h2 className="flex mb-6 text-2xl text-zinc-900 dark:text-zinc-100">
+       Restons en contact
       </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
+      <p className="mt-2 text-sm text-zinc-800 dark:text-zinc-100">
+        J'envoie des articles sur ce qui me passe par la tête - mais surtout sur la tech, les évolutions, et les choix architecturaux qu'on fait.
+      </p>
+      <p className="mt-4 text-sm text-zinc-800 dark:text-zinc-100">
+        Bien sur, vous pourrez vous désinscrire quand vous voulez.
       </p>
       <div className="mt-6 flex">
         <input
@@ -131,7 +137,7 @@ function Newsletter() {
           className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm"
         />
         <Button type="submit" className="ml-4 flex-none">
-          Join
+          Rejoignez-nous
         </Button>
       </div>
     </form>
@@ -189,27 +195,27 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'Xev.',
-      title: 'CEO',
+      title: 'P.D.G.',
       logo: logoXev,
       start: '2018',
       end: {
-        label: 'Present',
+        label: 'Maintenant',
         dateTime: new Date().getFullYear().toString(),
       },
     },
     {
       company: 'Mon Livret C',
-      title: 'CTO',
+      title: 'Directeur de la technologie',
       logo: logoMLC,
       start: '2023',
       end: {
-        label: 'Present',
+        label: 'Maintenant',
         dateTime: new Date().getFullYear().toString(),
       },
     },
     {
       company: 'Weblaunch',
-      title: 'Managing director',
+      title: 'Directeur Général',
       logo: logoWeblaunch,
       start: '2016',
       end: '2022',
@@ -224,47 +230,20 @@ function Resume() {
   ]
 
   return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <div className="my-16 lg:order-1 order-0 flex-grow lg:basis-5/12 rounded-2xl bg-white dark:bg-zinc-800/50 border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        <span className="ml-3">Parcours</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="https://www.linkedin.com/in/ahervet/details/experience/" variant="secondary" className="group mt-6 w-full">
-        See my full resume
+      <Button href="https://www.linkedin.com/in/ahervet" target="_blank" variant="secondary" className="group mt-6 w-full">
+        Voir le détail
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50 -rotate-90" />
       </Button>
-    </div>
-  )
-}
-
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
-
-  return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
-            key={`${image.src}-${imageIndex}`}
-            className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
-              rotations[imageIndex % rotations.length],
-            )}
-          >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-        ))}
-      </div>
     </div>
   )
 }
@@ -274,21 +253,12 @@ export default async function Home() {
 
   return (
     <>
-      <Container className="mt-9">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Software developer, founder, and amateur designer.
+      <Container className="mt-9 snap-center">
+        <div className="max-w-5xl">
+          <h1 className="text-6xl tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-7xl">
+            Dev fullstack, fondateur et designer amateur.
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Antoine, a software developer and entrepreneur based in Lyon. I’m the founder and CEO of <a className="text-red-500" href="https://xev.agency">Xev.</a>, where we develop
-            technologies that helps people in their Daily work. On my free time, I design apps and websites.
-          </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://www.instagram.com/droops777"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />
             <SocialLink
               href="https://github.com/AntoineXevlabs"
               aria-label="Follow on GitHub"
@@ -302,16 +272,27 @@ export default async function Home() {
           </div>
         </div>
       </Container>
-      <Photos />
+      <Container>
+        <ProjectExcerpt title={'Xev. — Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} buttonText={'Voir le projet'} href={'https://xev.agency'} />
+      </Container>
+      <Container>
+        <ProjectExcerpt align={'right'} title={'Mon Livret C — Spécialiste de l’investissement en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} buttonText={'En savoir plus'} href={'https://xev.agency'} />
+      </Container>
+      <Container>
+        <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={wodappImage} buttonText={'En savoir plus'} href={'https://xev.agency'} />
+      </Container>
+      <Container className="min-h-screen my-auto">
+        <div className="flex flex-col lg:flex-row gap-10 md:gap-32">
+          <Newsletter />
+          <Resume />
+        </div>
+      </Container>
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {articles.map((article) => (
               <Article key={article.slug} article={article} />
             ))}
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Resume />
           </div>
         </div>
       </Container>

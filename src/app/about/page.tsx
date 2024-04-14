@@ -10,7 +10,7 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
+import portraitImage from '@/images/photos/image-1.jpg'
 
 function SocialLink({
   className,
@@ -68,10 +68,10 @@ export default function About() {
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          <h1 className="text-6xl tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl mb-16">
             I’m Antoine. I live in Lyon, where I try to make stuff that helps others to get better.
           </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <div className="mt-6 space-y-7 text-base text-zinc-800 dark:text-zinc-200">
             <p>
               I’ve been making stuff for as long as I can remember.
               At around 13, I made a few bucks fixing Iphone screens (at that time that was a complex process),
