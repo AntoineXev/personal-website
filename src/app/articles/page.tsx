@@ -44,8 +44,8 @@ export default async function Articles() {
 
     return (
     <SimpleLayout
-      title="Retrouvez mes idées sur l'entrernariat, la programmation, la productivité, et ce qui me passe par la tête."
-      intro="All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
+      title="Voici mes idées. "
+      intro="Toutes mes réflexions sur la programmation, l'entreprenariat, la conception de produits et plus encore, rassemblées par ordre chronologique."
     >
         <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
             <div className="flex max-w-3xl flex-col space-y-16">

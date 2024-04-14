@@ -12,28 +12,28 @@ const projects = [
   {
     name: 'Xev.',
     description:
-      'Building powerfull apps for tomorrow\'s companies.',
+      'Construire des applications puissantes et sur mesure pour les PME de demain.',
     link: { href: 'https://xev.agency', label: 'xev.agency' },
     logo: logoXev,
   },
   {
     name: 'Mon livret C',
     description:
-      'Empowering traditional finance with crypto-based financial products',
+      'Renforcer la finance traditionnelle avec des produits basés sur les crypto-actifs.',
     link: { href: 'https://monlivretc.com', label: 'monlivretc.com' },
     logo: logoMLC,
   },
   {
     name: 'WodApp',
     description:
-      'A universal app for wod reservation. Free to use, for all.',
-    link: { href: 'https://github.com/Xevlabs/wod-mobile-app', label: 'github.com' },
+      'Une application universelle pour la réservation de WOD. Libre d\'utilisation, pour tous.',
+    link: { href: 'https://wodapp.fr', label: 'wodapp.fr' },
     logo: logoWod,
   },
   {
     name: 'Weblaunch',
     description:
-        'A company that sets e-commerce websites in less than one month.',
+        'Une entreprise qui lance des sites e-commerce en moins d\'un mois."',
     link: { href: 'https://weblaunch.fr', label: 'weblaunch.fr' },
     logo: logoWeblaunch,
   }
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on few projects those past years. Some of them turned to be companies, some other, only git repository that you can use freely. If you see something that piques your interest feel free to contact me to discuss about it."
+      title="Les choses que j'ai construit pour me faire une petite place dans l'unvivers"
+      intro="Au cours des dernières années, j'ai travaillé sur plusieurs projets. Certains ont donné naissance à des entreprises, d'autres sont restés de simples dépôts Git que vous pouvez utiliser librement. Si quelque chose vous intéresse, n'hésitez pas à me contacter pour en discuter."
     >
       <ul
         role="list"
