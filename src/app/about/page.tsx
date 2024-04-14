@@ -69,46 +69,20 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-6xl tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl mb-16">
-            Je construit des applications et des architectures d'application web & mobiles.
+            Concevoir des solutions qui améliorent la vie des autres.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-800 dark:text-zinc-200">
             <p>
-              I’ve been making stuff for as long as I can remember.
-              At around 13, I made a few bucks fixing Iphone screens (at that time that was a complex process),
-              and glitching some of the newest consoles on the market. I run mac on a non windows machine (hackintosh
-              for the close ones), at 15 years old, giving a second life to my old home computer
-              (I think it was OsX Tiger, back at that time, couldn't manage to put leopard on it). That way
-              I learned about bootloaders, command lines tools and kext files. A cool adventure.
+              Je m'appele Antoine, et depuis mon plus jeune âge, je bricole divers projets. À l'âge de 13 ans, je réparais des écrans d'iPhone, une tâche assez complexe à l'époque, et je bidouillais les dernières consoles de jeu du marché. À 15 ans, j'ai transformé un vieil ordinateur familial en machine Mac (un hackintosh pour les initiés), utilisant alors OS X Tiger. Cette expérience m'a permis d'apprendre à manipuler les chargeurs de démarrage, les outils en ligne de commande et les fichiers kext. Un projet sympa !
             </p>
             <p>
-              Back at that time, the only thing I loved more than computers was sneakers.
-              When I did not spend my free time on a computer, I spend time camping out for the
-              latest fashion sneakers that released. Spent some nights out in front of shops to get some pairs, and
-              resell them the next day for 3 times the price. Funny tho.
+              À cette époque, ma passion pour l'informatique n'était surpassée que par mon amour pour les baskets. Lorsque je ne passais pas mon temps libre sur un ordinateur, je faisais la queue devant les magasins pour acheter les dernières sneakers à la mode et les revendre le lendemain pour le triple de leur prix. Drôle, n'est-ce pas ?
             </p>
             <p>
-             But I stopped everything from the age of 18 to my 20, doing some preparatory classes.
-              A specific of the french educational system, where you need to study very intensively math & physics for
-              2 years (from 7am to 1am, quite challenging, lol). But trust me, it was worth it,
-              the 2 most shaping years of my life. Then I get to a computer oriented engineer school (Imt Atlantique, formerly
-              known as Telecom Bretagne).
+              Cependant, j'ai tout arrêté entre 18 et 20 ans pour suivre un classe préparatoire, un pilier du système éducatif français, où j'ai étudié intensément les mathématiques et la physique (de 7h à 1h du matin). Ces deux années ont été les plus formatrices de ma vie. Par la suite, j'ai intégré l'école d'ingénieurs IMT Atlantique, anciennement Télécom Bretagne. Après mes études, j'ai tenté l'aventure entrepreneuriale en essayant de créer une marketplace dans le secteur des sneakers, qui malheureusement n'a pas abouti mais m'a beaucoup appris. Par la suite, je me suis installé à Berlin pour approfondir mes connaissances en développement web appliqué aux défis corporatifs.
             </p>
             <p>
-              After that, I tried the entrepreneurial adventure, trying to make some marketplace in the sneaker industries,
-              where the resellers could sell their sneakers to anyone... Well it did not work.
-              But that was a nice and learning experience. I moved to Berlin to learn more about web development applied to
-              corporate challenges
-            </p>
-            <p>
-              Today, I’m the founder of Xev., where we’re working on improving workers' life, trying to build
-              fully customised software for companies specific challenges.
-              A next generation of consulting and development agency, where we try to help companies to
-              really embrace the power of the web and cloud-based applications.
-            </p>
-            <p>
-              Recently I took a position of general manager and CTO at Mon livret C. It's a french asset manager,
-              where we're trying to build and ship strong and robust cryptocurrencies based financial product to
-              the banks, and the whole traditional financial system.
+              Aujourd'hui, je suis le fondateur de Xev., une agence de conseil et de développement de nouvelle génération. Nous travaillons à améliorer la vie des travailleurs en construisant des logiciels entièrement personnalisés pour répondre aux défis spécifiques des entreprises, en les aidant à tirer pleinement parti du web et des applications basées sur le cloud. Récemment, j'ai pris le poste de directeur général et CTO chez Mon livret C, un gestionnaire d'actifs français, où nous nous efforçons de développer et de commercialiser des produits financiers robustes basés sur les cryptomonnaies destinés aux banques et à l'ensemble du système financier traditionnel.
             </p>
           </div>
         </div>
