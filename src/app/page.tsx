@@ -119,25 +119,26 @@ function Newsletter() {
       action="/thank-you"
       className="my-auto lg:basis-7/12 py-6 dark:border-zinc-700/40 lg:order-0 order-1"
     >
-      <h2 className="flex mb-6 text-2xl text-zinc-900 dark:text-zinc-100">
-       Restons en contact
+      <h2 className="flex mb-6 text-4xl text-zinc-900 dark:text-zinc-100">
+       Un projet ?
       </h2>
       <p className="mt-2 text-sm text-zinc-800 dark:text-zinc-100">
-        J'envoie des articles sur ce qui me passe par la tête - mais surtout sur la tech, les évolutions, et les choix architecturaux qu'on fait.
+        Vous souhaitez travailler avec moi ? Vous avez un projet d'application que vous souhaitez développer ?
       </p>
       <p className="mt-4 text-sm text-zinc-800 dark:text-zinc-100">
-        Bien sur, vous pourrez vous désinscrire quand vous voulez.
+        Entrez votre mail, je vous recontacterai le plus rapidement possible.
       </p>
-      <div className="mt-6 flex">
+      <div className="mt-8 flex flex-col items-start gap-6">
         <input
           type="email"
           placeholder="Email address"
           aria-label="Email address"
           required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm"
+          className="min-w-0 w-full flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm"
         />
-        <Button type="submit" className="ml-4 flex-none">
-          Rejoignez-nous
+        <Button variant="secondary" type="submit" className="">
+          Discutons ensemble
+          <ArrowDownIcon className="h-4 w-4 stroke-white transition group-active:stroke-gray-100 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50 -rotate-90" />
         </Button>
       </div>
     </form>
@@ -240,9 +241,8 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="https://www.linkedin.com/in/ahervet" target="_blank" variant="secondary" className="group mt-6 w-full">
+      <Button href="https://www.linkedin.com/in/ahervet" target="_blank" className="group mt-6 w-full">
         Voir le détail
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50 -rotate-90" />
       </Button>
     </div>
   )
@@ -276,13 +276,13 @@ export default async function Home() {
         <ProjectExcerpt title={'Xev. — Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} buttonText={'Voir le projet'} href={'https://xev.agency'} />
       </Container>
       <Container>
-        <ProjectExcerpt align={'right'} title={'Mon Livret C — Spécialiste de l’investissement en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} buttonText={'En savoir plus'} href={'https://xev.agency'} />
+        <ProjectExcerpt align={'right'} title={'Mon Livret C — Spécialiste de l’investissement en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
       </Container>
       <Container>
-        <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={wodappImage} buttonText={'En savoir plus'} href={'https://xev.agency'} />
+        <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
       </Container>
-      <Container className="min-h-screen my-auto">
-        <div className="flex flex-col lg:flex-row gap-10 md:gap-32">
+      <Container>
+        <div className="min-h-screen flex flex-col items-center lg:flex-row gap-10 md:gap-32 my-auto">
           <Newsletter />
           <Resume />
         </div>

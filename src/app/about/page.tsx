@@ -69,7 +69,7 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-6xl tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl mb-16">
-            I’m Antoine. I live in Lyon, where I try to make stuff that helps others to get better.
+            Je construit des applications et des architectures d'application web & mobiles.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-800 dark:text-zinc-200">
             <p>
@@ -114,17 +114,11 @@ export default function About() {
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={TwitterIcon}>
-              Follow on Twitter
+            <SocialLink href="https://github.com/antoinexev" icon={GitHubIcon} className="mt-4">
+              Suivez-moi sur GitHub
             </SocialLink>
-            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
-              Follow on Instagram
-            </SocialLink>
-            <SocialLink href="#" icon={GitHubIcon} className="mt-4">
-              Follow on GitHub
-            </SocialLink>
-            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
-              Follow on LinkedIn
+            <SocialLink href="https://www.linkedin.com/in/ahervet/" icon={LinkedInIcon} className="mt-4">
+              Suivez-moi sur Linkedin
             </SocialLink>
             <SocialLink
               href="mailto:hello@aher.vet"
