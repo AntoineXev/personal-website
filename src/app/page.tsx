@@ -95,7 +95,7 @@ function Article({ article }: { article: ArticleWithSlug }) {
         {formatDate(article.date)}
       </Card.Eyebrow>
       <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
+      <Card.Cta>Lire l'article</Card.Cta>
     </Card>
   )
 }
@@ -281,19 +281,19 @@ export default async function Home() {
       <Container>
         <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
       </Container>
-      <Container>
-        <div className="min-h-screen flex flex-col items-center lg:flex-row gap-10 md:gap-32 my-auto">
-          <Newsletter />
-          <Resume />
-        </div>
-      </Container>
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {articles.map((article) => (
-              <Article key={article.slug} article={article} />
+                <Article key={article.slug} article={article} />
             ))}
           </div>
+        </div>
+      </Container>
+      <Container>
+        <div className="min-h-screen flex flex-col items-center lg:flex-row gap-10 md:gap-32 my-auto">
+          <Newsletter />
+          <Resume />
         </div>
       </Container>
     </>

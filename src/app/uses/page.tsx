@@ -35,74 +35,53 @@ function Tool({
 }
 
 export const metadata = {
-  title: 'Uses',
-  description: 'Daily tools and hardware that I use and recommend for productivity.',
+  title: 'Mes outils',
+  description: 'Je suis souvent interrogé sur les outils que j\'utilise pour développer des logiciels et rester productif. Voici une liste non exhaustive de mes outils favoris.',
 }
 
 export default function Uses() {
   return (
     <SimpleLayout
-      title="Daily tools and hardware that I use and recommend for productivity."
-      intro="I get asked a lot about the things I use to build software, stay productive. Here’s a big list of all of my favorite stuff, pick what you need from there"
+      title="Ce que j'utilise au quotidien"
+      intro="Je suis souvent interrogé sur les outils que j'utilise pour développer des logiciels et rester productif. Voici une liste exhaustive de mes équipements préférés, choisissez ce dont vous avez besoin :"
     >
       <div className="space-y-20">
-        <ToolsSection title="Workstation">
-          <Tool title="13”3 MacBook Pro, M1, 16GB RAM (2020)">
-            This is the chip version of the macbook. But the M1 chip is incredible.
-            It can be charged with a phone charger, and last more than 10 hours.
-            16GB is required tho, but right now you can find that machine for less than 700€.
+        <ToolsSection title="Poste de travail">
+          <Tool title="MacBook Pro 13 pouces, M1, 16 Go de RAM (2020)">
+            C'est la version avec la puce M1, incroyable. Elle peut être chargée avec un chargeur de téléphone et dure plus de 10 heures. 16 Go sont nécessaires, mais actuellement, vous pouvez trouver cette machine pour moins de 700€.
           </Tool>
-          <Tool title="Huawei Mateview #4-inch (Ultra-wide screen)">
-            Large screen is better than 2 small screens imo. I found this one really cool to work with.
-            Soundbar is not to be used tho.
+          <Tool title="Huawei Mateview 34 pouces (Écran ultra-large)">
+            Un grand écran est meilleur que deux petits à mon avis. Celui-ci est vraiment agréable à utiliser. Cependant, il est préférable de ne pas utiliser la barre de son.
           </Tool>
           <Tool title="Roccat Kone Aimo">
-            Roccat is the best mouse manufacturer on the market imo.
-            If you don't need a wireless mouse, the kone Aimo will make an incredible job.
-            Should it be for work or gaming, the custom setups will make you unstopable !
+            Roccat est le meilleur fabricant de souris sur le marché à mon avis. Si vous n'avez pas besoin d'une souris sans fil, la Kone Aimo fera un travail incroyable. Les configurations personnalisées sont incroyable pour la productivité.
           </Tool>
-          <Tool title="Sony WH-1000XM4 (Noise Canceller Headset)">
-            I've tried a few headsets (I've been a DJ when I was young),
-            this one has the best cost effectiveness on the market.
-            For less that 250€, you'll have an incredible noise cancellation feature, gestures, and more than 20hours of battery.
-          </Tool>
-          <Tool title="Ember connected coffee cup">
-            Starting the day without a coffee is definitly a no go for me.
-            But keeping the coffee warm, and beeing able to drink it around the whole day, is something I struggled about by the past.
-            Well, now it's over, ember cup is keeping my coffee warm all day long.
+          <Tool title="Sony WH-1000XM4 (Casque à réduction de bruit)">
+            J'ai essayé plusieurs casques (j'ai été DJ quand j'étais jeune), celui-ci offre le meilleur rapport qualité-prix sur le marché. Pour moins de 250€, vous aurez une fonction de réduction de bruit incroyable, des gestes, et plus de 20 heures d'autonomie.          </Tool>
+          <Tool title="Tasse à café connectée Ember">
+            Commencer la journée sans café est impensable pour moi. Mais garder le café chaud et pouvoir en boire toute la journée, c'était un problème par le passé. Maintenant, c'est réglé, la tasse Ember garde mon café chaud toute la journée.
           </Tool>
         </ToolsSection>
-        <ToolsSection title="Development tools">
+        <ToolsSection title="Outils pour le developpement web">
           <Tool title="Webstorm">
-            I started using webstorm when I started web development. Since then, I never had any needs for another IDE.
-            Tried VSCode, but to make it as powerfull as webstorm, you'lle need tons of plugins ...
+            J'ai commencé à utiliser Webstorm quand j'ai débuté en développement web. Depuis, je n'ai jamais eu besoin d'un autre IDE. J'ai essayé VSCode, mais pour le rendre aussi puissant que Webstorm, il vous faudra des tonnes de plugins...
           </Tool>
           <Tool title="IntelIJ Idea">
-            Same as webstorm, started Java dev on intelIj, never moved away since. Tried Eclipse once, need a 3 weeks holiday to get past it.
+            Tout comme pour Webstorm, j'ai commencé le développement Java sur IntelliJ et je n'ai jamais changé depuis. J'ai essayé Eclipse une fois, il m'a fallu trois semaines de vacances pour m'en remettre.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Productivity">
           <Tool title="Sunsama">
-            I tried dozen's of to do list and daily planners... it's maybe because of my adhd symptoms,
-            but I never had any of them working. Except Sunsama. This is the best planner ever made.
-            You'll have your tasks for the week, you'll plan your days, and never loose track of your personal tasks
-            with an easy to use backlog.
+            J'ai essayé des dizaines de listes de tâches et d'organisateurs quotidiens... Peut-être à cause de mes symptômes de TDAH, mais aucun n'a fonctionné, sauf Sunsama. C'est le meilleur organisateur jamais créé. Vous avez vos tâches pour la semaine, vous planifiez vos jours, et vous ne perdez jamais le fil de vos tâches personnelles grâce à un backlog facile à utiliser.
           </Tool>
           <Tool title="Spark">
-            From all that I have tested, Spark is the best email reader on the market.
-            It allows me to keep inbox 0 every day, with concept of processed and reported emails.
-            So bad I can't move mails directly into Sunsama with an automation.
+            De tout ce que j'ai testé, Spark est le meilleur lecteur d'e-mails sur le marché. Il me permet de maintenir ma boîte de réception à zéro chaque jour, avec un concept d'e-mails traités et reportés. Dommage que je ne puisse pas déplacer les e-mails directement dans Sunsama avec une automatisation.
           </Tool>
           <Tool title="Arc Browser">
-            Everyone knows Arc. It's the reveal of 2023.
-            It did not completely changed the way I browsed internet,
-            but it helps me keeping my tabs and browsing process clean along the day,
-            which is pretty cool if you are pretty messy with tabs like I am.
+            Tout le monde connaît Arc. C'est la révélation de 2023. Il n'a pas complètement changé ma façon de naviguer sur Internet, mais il m'aide à garder mes onglets et mon processus de navigation propres tout au long de la journée, ce qui est plutôt cool si vous êtes désordonné avec les onglets comme moi.
           </Tool>
           <Tool title="Raycast">
-            Discovered Raycast this month. Was using alfred, but Raycast is Alfred on steroids.
-            A game changer for mac productivity, I do basically everything with my keyboard right not.
-            Even arc Command + T shortcut can be integrated, so I do any browsing from their now on.
+            J'ai découvert Raycast ce mois-ci. J'utilisais Alfred, mais Raycast est Alfred sous stéroïdes. Un changement de jeu pour la productivité sur Mac, je fais pratiquement tout avec mon clavier maintenant. Même le raccourci Command + T d'Arc peut être intégré, donc je fais toute ma navigation à partir de là maintenant.
           </Tool>
         </ToolsSection>
       </div>

@@ -1,5 +1,6 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 
+// @ts-ignore
 export const article = {
     author: 'Antoine Hervet',
     date: '2024-04-14',
@@ -72,7 +73,6 @@ export default function ArticlePage () {
                 voulez que la technologie travaille pour vous et non l'inverse, je vous invite à nous contacter.
                 Ensemble, explorons comment nos solutions personnalisées peuvent vous aider à transformer votre
                 entreprise.
-
             </p>
         </ArticleLayout>
     )

@@ -18,8 +18,6 @@ async function importArticle(
     default: React.ComponentType
     article: Article
   }
-  console.log(articleFilename)
-  console.log(article)
 
   return {
     slug: articleFilename.replace(/(\/page)?\.tsx$/, ''),
@@ -33,6 +31,5 @@ export async function getAllArticles() {
   })
 
   let articles = await Promise.all(articleFilenames.map(importArticle))
-  console.log(articles)
   return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
 }
