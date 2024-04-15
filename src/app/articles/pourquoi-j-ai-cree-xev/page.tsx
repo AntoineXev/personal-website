@@ -1,4 +1,5 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+export const runtime = 'edge';
 
 // @ts-ignore
 export const article = {
@@ -19,7 +20,7 @@ export default function ArticlePage () {
     return (
         <ArticleLayout article={article}>
             <p>Depuis mon plus jeune âge, je suis fasciné par le potentiel des technologies à transformer notre vie
-                quoti3>dienne. Ce n'est pas simplement la technologie en elle-même qui m'intéresse, mais ce que nous
+                quotidienne. Ce n'est pas simplement la technologie en elle-même qui m'intéresse, mais ce que nous
                 pouvons en faire. En grandissant et en explorant le monde du développement et de l'entrepreneuriat, j'ai
                 rapidement compris que les PME et les ETI étaient souvent laissées pour compte dans cette révolution
                 technologique rapide.</p>
