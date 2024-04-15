@@ -26,28 +26,6 @@ import { formatDate } from '@/lib/formatDate'
 import '../styles/global.scss';
 import { ProjectExcerpt } from "@/components/ProjectExcerpt";
 
-function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -166,7 +144,7 @@ function Role({ role }: { role: Role }) {
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 bg-zinc-800 dark:ring-0">
         <div className="p-1 bg-zinc-800 rounded-full">
-          <Image src={role.logo} alt="" className="h-6 w-6" unoptimized />
+          <Image quality={80} src={role.logo} alt={role.title} width={100} height={100} className="h-6 w-6" unoptimized />
         </div>
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
@@ -273,13 +251,13 @@ export default async function Home() {
         </div>
       </Container>
       <Container>
-        <ProjectExcerpt title={'Xev. — Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} buttonText={'Voir le projet'} href={'https://xev.agency'} />
+        <ProjectExcerpt title={'Xev. — Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'} href={'https://xev.agency'} />
       </Container>
       <Container>
-        <ProjectExcerpt align={'right'} title={'Mon Livret C — Spécialiste de l’investissement en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
+        <ProjectExcerpt align={'right'} title={'Mon Livret C — Spécialiste de l’investissement en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
       </Container>
       <Container>
-        <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
+        <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} imageAlt={'Application web et mobile de wodapp'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
       </Container>
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
