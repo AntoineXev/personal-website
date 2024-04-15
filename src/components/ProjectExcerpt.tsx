@@ -75,7 +75,7 @@ export function ProjectExcerpt ({
                 <div className={clsx(imgWrapperClasses, "flex-grow relative")}>
                     <div
                         className={clsx(imgContainerClasses, "top-0 bottom-0 lg:block rounded-md")}>
-                        <Image alt={imageAlt} className={clsx(imgClasses, "max-w-none")} src={image.src}/>
+                        <Image width={500} height={500} alt={imageAlt} className={clsx(imgClasses, "max-w-none")} src={image.src}/>
                     </div>
                 </div>
 
