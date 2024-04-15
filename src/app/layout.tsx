@@ -4,6 +4,9 @@ import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
+import { Head } from "next/document";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +23,25 @@ export const metadata: Metadata = {
   },
 }
 
+class InlineStylesHead extends Head {
+  getCssLinks: Head["getCssLinks"] = ({ allFiles }) => {
+    const { assetPrefix } = this.context;
+    if (!allFiles || allFiles.length === 0) return null;
+    return allFiles
+        .filter((file: any) => /\.css$/.test(file))
+        .map((file: any) => (
+            <style
+                key={file}
+                nonce={this.props.nonce}
+                data-href={`${assetPrefix}/_next/${file}`}
+                dangerouslySetInnerHTML={{
+                  __html: readFileSync(join(process.cwd(), ".next", file), "utf-8"),
+                }}
+            />
+        ));
+  };
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -27,7 +49,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="h-full antialiased scroll-smooth overflow-x-hidden" suppressHydrationWarning>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
+    <InlineStylesHead />
+    <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
           <div className="flex w-full">
             <Layout>{children}</Layout>

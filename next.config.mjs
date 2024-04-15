@@ -8,6 +8,8 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  experimental: { optimizeCss: true },
+  swcMinify: false,
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

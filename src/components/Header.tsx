@@ -225,6 +225,8 @@ function Avatar ({
                 src={avatarImage}
                 alt="Antoine prenant une photo"
                 sizes={large ? '4rem' : '2.25rem'}
+                height={50}
+                width={50}
                 className={clsx(
                     'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
                     large ? 'h-16 w-16' : 'h-9 w-9',
