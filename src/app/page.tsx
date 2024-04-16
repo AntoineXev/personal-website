@@ -1,13 +1,11 @@
 import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import {
   GitHubIcon,
-  InstagramIcon,
   LinkedInIcon,
 } from '@/components/SocialIcons'
 import logoMLC from '@/images/logos/mlc.svg'
@@ -16,15 +14,11 @@ import logoBloom from '@/images/logos/bloom.svg'
 import logoWeblaunch from '@/images/logos/weblaunch.svg'
 import mlcAppImage from '@/images/mlc-apps.png'
 import wodappImage from '@/images/wodapp.png'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
-import '../styles/global.scss';
 import { ProjectExcerpt } from "@/components/ProjectExcerpt";
+import Head from "next/head";
+import { BreadcrumbList, Graph, Person } from "schema-dts";
 
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -226,11 +220,113 @@ function Resume() {
   )
 }
 
+const breadCrumbs: BreadcrumbList = {
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 0,
+      "name": "Antoine Hervet",
+      "item": "https://aher.vet/"
+    }
+  ]
+}
+
+const person: Person = {
+  "@type": "Person",
+  "name": "Antoine Hervet",
+  "url": "https://aher.vet",
+  "@id": "https://aher.vet/#",
+  "worksFor": {"@id": "https://xev.agency"},
+  "honorificSuffix": "M.",
+  "alumniOf": [
+    {
+      "@type": "Organization",
+      "name": "Telecom Bretagne",
+      "@id": "https://www.wikidata.org/wiki/Q2460307"
+    },
+    {
+      "@type": "Organization",
+      "name": "EmLyon Business School",
+      "@id": "https://www.wikidata.org/wiki/Q1795504"
+    }],
+  "sameAs": [
+    "https://fr.linkedin.com/in/ahervet",
+    "https://www.pappers.fr/dirigeant/antoine_hervet_1996-02"
+  ],
+  "jobTitle": {
+    "@type": "DefinedTerm",
+    "name": "Entrepreneur",
+    "alternateName": "entrepreneur",
+    "sameAs": "https://resources.workable.com/entrepreneur-job-description"
+  },
+  "knowsLanguage": ["french", "english"],
+  "knowsAbout": [
+    {
+      "@type": "Thing",
+      "name": "Web developpement",
+      "alternateName": "Fullstack developpment",
+      "@id": "https://www.wikidata.org/wiki/Q386275"
+    },
+    {
+      "@type": "Thing",
+      "name": "Enterprise ressource planning",
+      "alternateName": "ERP",
+      "@id": "https://www.wikidata.org/wiki/Q131508"
+    },
+    {
+      "@type": "Thing",
+      "name": "Angular",
+      "alternateName": "Angular material",
+      "@id": "https://www.wikidata.org/wiki/Q28925578"
+    },
+    {
+      "@type": "Thing",
+      "name": "Strapi",
+      "alternateName": "Strapi CMS",
+      "@id": "https://www.wikidata.org/wiki/Q105826887"
+    },
+    {
+      "@type": "Thing",
+      "name": "addiction",
+      "alternateName": "addictions",
+      "@id": "https://www.wikidata.org/wiki/Q12029"
+    },
+    {
+      "@type": "Thing",
+      "name": "Cryptocurrency",
+      "alternateName": "Crypto",
+      "@id": "https://www.wikidata.org/wiki/Q13479982"
+    },
+    {
+      "@type": "Thing",
+      "name": "Blockchain",
+      "@id": "https://www.wikidata.org/wiki/Q20514253"
+    }
+  ]
+}
+
+const graph: Graph = {
+  "@context": "https://schema.org",
+  "@graph":[person, breadCrumbs]
+}
 export default async function Home() {
   let articles = (await getAllArticles()).slice(0, 4)
 
   return (
     <>
+      <Head>
+        <link
+            rel="canonical"
+            href="https://aher.vet/"
+            key="canonical"
+        />
+        <script
+            type='application/ld+json'
+            key="product-jsonld"
+
+            dangerouslySetInnerHTML={{__html: JSON.stringify(graph)}}/>
+      </Head>
       <Container className="mt-9 snap-center">
         <div className="max-w-5xl">
           <h1 className="text-6xl tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-7xl">
