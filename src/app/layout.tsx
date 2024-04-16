@@ -2,10 +2,11 @@ import { type Metadata } from 'next'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
+import { DM_Sans } from 'next/font/google'
 
 import '@/styles/tailwind.css'
-import { Head } from "next/document";
-import { readFileSync } from "fs";
+import clsx from "clsx";
+const dmSans = DM_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
@@ -22,24 +23,6 @@ export const metadata: Metadata = {
   },
 }
 
-class InlineStylesHead extends Head {
-  getCssLinks: Head["getCssLinks"] = ({ allFiles }) => {
-    const { assetPrefix } = this.context;
-    if (!allFiles || allFiles.length === 0) return null;
-    return allFiles
-        .filter((file: any) => /\.css$/.test(file))
-        .map((file: any) => (
-            <style
-                key={file}
-                nonce={this.props.nonce}
-                data-href={`${assetPrefix}/_next/${file}`}
-                dangerouslySetInnerHTML={{
-                  __html: readFileSync(`${process.cwd()}/.next/${file}` , "utf-8"),
-                }}
-            />
-        ));
-  };
-}
 
 export default function RootLayout({
   children,
@@ -47,8 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className="h-full antialiased scroll-smooth overflow-x-hidden" suppressHydrationWarning>
-    <InlineStylesHead />
+    <html lang="fr" className={clsx(dmSans.className, "h-full antialiased scroll-smooth overflow-x-hidden")} suppressHydrationWarning>
     <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
           <div className="flex w-full">
