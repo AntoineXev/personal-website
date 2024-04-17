@@ -9,7 +9,7 @@ export default {
   plugins: [typographyPlugin],
   theme: {
     fontSize: {
-      xs: ['0.8125rem', { lineHeight: '1.5rem' }],
+      xs: ['1rem', { lineHeight: '1.5rem' }],
       sm: ['1.25rem', { lineHeight: '1.5rem' }],
       base: ['1.5rem', { lineHeight: '2rem' }],
       lg: ['1.875rem', { lineHeight: '2rem' }],

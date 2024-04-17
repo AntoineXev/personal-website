@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import clsx from "clsx";
+import Image from "next/image";
 
 export interface ProjectExcerptProps {
     align?: 'left' | 'right' | 'center',
@@ -9,7 +10,8 @@ export interface ProjectExcerptProps {
     title: string,
     subtitle: string,
     href: string,
-    buttonText: string
+    buttonText: string,
+    imageAlt: string,
 }
 
 function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -37,7 +39,8 @@ export function ProjectExcerpt ({
         title,
         subtitle,
         href,
-        buttonText
+        buttonText,
+        imageAlt
     } = props
     let wrapperClasses: string = 'text-left justify-start'
     let buttonClasses: string = 'mr-auto'
@@ -72,7 +75,7 @@ export function ProjectExcerpt ({
                 <div className={clsx(imgWrapperClasses, "flex-grow relative")}>
                     <div
                         className={clsx(imgContainerClasses, "top-0 bottom-0 lg:block rounded-md")}>
-                        <img className={clsx(imgClasses, "max-w-none")} src={image.src}/>
+                        <Image width={500} height={500} alt={imageAlt} className={clsx(imgClasses, "max-w-none")} src={image.src}/>
                     </div>
                 </div>
 

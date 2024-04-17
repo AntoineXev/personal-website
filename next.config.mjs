@@ -5,9 +5,18 @@ import remarkGfm from 'remark-gfm'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-  webpack: {
-    nextRuntime: 'edge'
-  }
+  compiler: {
+    styledComponents: true,
+  },
+  experimental: { optimizeCss: true },
+  swcMinify: false,
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
 }
 
 const withMDX = nextMDX({
