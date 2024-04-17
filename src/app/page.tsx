@@ -309,7 +309,7 @@ export default async function Home() {
           </h1>
           <div className="mt-6 flex gap-6">
             <SocialLink
-              href="https://github.com/AntoineXevlabs"
+              href="https://github.com/AntoineXev"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />

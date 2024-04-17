@@ -78,9 +78,7 @@ export function ProjectExcerpt ({
                         <Image width={500} height={500} alt={imageAlt} className={clsx(imgClasses, "max-w-none")} src={image.src}/>
                     </div>
                 </div>
-
             </div>
-
         </div>
     )
 }
