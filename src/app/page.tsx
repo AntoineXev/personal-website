@@ -322,13 +322,13 @@ export default async function Home() {
         </div>
       </Container>
       <Container>
-        <ProjectExcerpt title={'Xev. — Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'} href={'https://xev.agency'} />
+        <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'} href={'https://xev.agency'} />
       </Container>
       <Container>
-        <ProjectExcerpt align={'right'} title={'Mon Livret C — Spécialiste de l’investissement en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
+        <ProjectExcerpt align={'right'} title={'Mon Livret C _ Gestionnaire de fonds en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
       </Container>
       <Container>
-        <ProjectExcerpt align={'center'} title={'Wodapp — Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} imageAlt={'Application web et mobile de wodapp'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
+        <ProjectExcerpt align={'center'} title={'Wodapp _ Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} imageAlt={'Application web et mobile de wodapp'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
       </Container>
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">

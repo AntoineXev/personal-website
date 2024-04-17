@@ -64,7 +64,7 @@ export function ProjectExcerpt ({
     return (
         <div className="h-screen flex flex-col justify-center">
             <div className={clsx(wrapperClasses, "flex")}>
-                <div className={clsx(textWrapperClasses, "flex flex-col order-1")}>
+                <div className={clsx(textWrapperClasses, "flex flex-col order-1 w-full")}>
                     <h2 className="text-4xl tracking-tight sm:text-4xl mb-5">{title}</h2>
                     <p className="text-sm">{subtitle}</p>
                     <Button className={clsx(buttonClasses, 'mt-8')} href={href} target={'_blank'}>
