@@ -3,6 +3,7 @@ import { type Metadata } from 'next'
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 import { DM_Sans } from 'next/font/google'
+import avatarImage from '@/images/avatar.jpg'
 
 import '@/styles/tailwind.css'
 import clsx from "clsx";
@@ -17,11 +18,20 @@ export const metadata: Metadata = {
     },
     description:
         'Developpeur web fullstack, créateur d\'entreprise, je donne vie à des projets et des produits tech. depuis maintenant plus de 10 ans',
+    metadataBase: new URL('https://aher.vet/'),
     alternates: {
-        types: {
-            'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
-        },
+        canonical: '/'
     },
+    openGraph: {
+        title: {
+            template: '%s - Antoine Hervet',
+            default:
+                'Antoine Hervet - Dev fullstack, fondateur et designer amateur.',
+        },
+        description:
+            'Developpeur web fullstack, créateur d\'entreprise, je donne vie à des projets et des produits tech. depuis maintenant plus de 10 ans',
+    },
+
 }
 
 export default function RootLayout ({

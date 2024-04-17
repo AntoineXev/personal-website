@@ -17,8 +17,8 @@ import wodappImage from '@/images/wodapp.png'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import { ProjectExcerpt } from "@/components/ProjectExcerpt";
-import Head from "next/head";
 import { BreadcrumbList, Graph, Person } from "schema-dts";
+import { Schema } from "@/components/Schema";
 
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -220,17 +220,7 @@ function Resume() {
   )
 }
 
-const breadCrumbs: BreadcrumbList = {
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 0,
-      "name": "Antoine Hervet",
-      "item": "https://aher.vet/"
-    }
-  ]
-}
+
 
 const person: Person = {
   "@type": "Person",
@@ -306,27 +296,12 @@ const person: Person = {
   ]
 }
 
-const graph: Graph = {
-  "@context": "https://schema.org",
-  "@graph":[person, breadCrumbs]
-}
 export default async function Home() {
   let articles = (await getAllArticles()).slice(0, 4)
 
   return (
     <>
-      <Head>
-        <link
-            rel="canonical"
-            href="https://aher.vet/"
-            key="canonical"
-        />
-        <script
-            type='application/ld+json'
-            key="product-jsonld"
-
-            dangerouslySetInnerHTML={{__html: JSON.stringify(graph)}}/>
-      </Head>
+      <Schema things={[person]} slug={''}/>
       <Container className="mt-9 snap-center">
         <div className="max-w-5xl">
           <h1 className="text-6xl tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-7xl">
