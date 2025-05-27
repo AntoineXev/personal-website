@@ -14,6 +14,7 @@ import logoBloom from '@/images/logos/bloom.svg'
 import logoWeblaunch from '@/images/logos/weblaunch.svg'
 import mlcAppImage from '@/images/mlc-apps.png'
 import wodappImage from '@/images/wodapp.png'
+import HeroImage from '@/images/hero-image.png'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import { ProjectExcerpt } from "@/components/ProjectExcerpt";
@@ -302,24 +303,25 @@ export default async function Home() {
   return (
     <>
       <Schema things={[person]} slug={''}/>
-      <Container className="mt-9 snap-center">
-        <div className="max-w-5xl">
-          <h1 className="text-6xl tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-7xl">
-            Dev fullstack, fondateur et designer amateur.
+      <Container className="px-0 pt-6 h-[calc(100vh-6rem)] overflow-hidden snap-center">
+        <div className="max-w-4xl mx-auto flex flex-col items-center  overflow-hidden">
+          <div className="bg-green-100 dark:bg-green-950 dark:text-green-600 text-green-800 px-4 py-2 rounded-full text-sm mb-6 flex items-center justify-center gap-2">
+            <div className="relative flex h-3 w-3">
+              <span
+                className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-green-600"></span>
+
+            </div>
+            Available
+          </div>
+          <h1 className="font-medium text-3xl leading-normal text-center tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+            Mobile & web designer, Developper, and entrepreneur
           </h1>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://github.com/AntoineXev"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://www.linkedin.com/in/ahervet/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
+          <div className="flex gap-6 -mt-[5.5rem] -ml-16 rotate-6 w-[650px] transform md:max-w-lg">
+            <Image src={HeroImage} alt="iphone"/>
           </div>
         </div>
+
       </Container>
       <Container>
         <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'} href={'https://xev.agency'} />
