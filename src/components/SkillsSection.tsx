@@ -15,7 +15,9 @@ const SkillCard = forwardRef((props: any, ref: any) => {
 	)
 })
 
-export default function SkillsSection () {
+SkillCard.displayName = "SkillCard"
+
+export function SkillsSection () {
 	const skillCardRef1 = useRef<HTMLDivElement>(null);
 	const skillCardRef2 = useRef<HTMLDivElement>(null);
 	const skillCardRef3 = useRef<HTMLDivElement>(null);

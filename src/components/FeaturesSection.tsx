@@ -1,5 +1,3 @@
-import {Section} from "@/components/Section";
-import {Container} from "@/components/Container";
 import clsx from "clsx";
 
 function FeatureCard({dashClasses}: { dashClasses?: string }) {
