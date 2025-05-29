@@ -21,7 +21,7 @@ export default {
       '6xl': ['5.25rem', { lineHeight: '6.25rem' }],
       '7xl': ['8rem', { lineHeight: '8.25rem' }],
       '8xl': ['6rem', { lineHeight: '1' }],
-      '9xl': ['8rem', { lineHeight: '1' }],
+      '9xl': ['10rem', { lineHeight: '1' }],
     },
     fontFamily: {
       'sans': [

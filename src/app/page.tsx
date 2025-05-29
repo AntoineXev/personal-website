@@ -21,6 +21,8 @@ import { ProjectExcerpt } from "@/components/ProjectExcerpt";
 import { BreadcrumbList, Graph, Person } from "schema-dts";
 import { Schema } from "@/components/Schema";
 import {HeroSection} from "@/components/HeroSection";
+import {FeaturesSection} from "@/components/FeaturesSection";
+import {SkillsSection} from "@/components/SkillsSection";
 
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -305,6 +307,8 @@ export default async function Home() {
     <>
       <Schema things={[person]} slug={''}/>
       <HeroSection />
+      <FeaturesSection />
+      <SkillsSection />
       <Container>
         <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'}
                         subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'}
