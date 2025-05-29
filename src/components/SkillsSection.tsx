@@ -27,7 +27,7 @@ export function SkillsSection () {
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			const handleResize = () => {
-				if((window?.innerWidth)/4 >= 768) {
+				if(window?.innerWidth >= 768) {
 					setIsMobile(false)
 				} else {
 					setIsMobile(true)
@@ -56,7 +56,7 @@ export function SkillsSection () {
 		})
 			.addLabel('2nd icon')
 			.to(skillCardRef2.current, {
-				x: isMobile ?'-20%': '-65%',
+				x: isMobile ?'-20%': '-85%',
 				y: isMobile ? '-90%':'-70%',
 				rotation: isMobile ? 12: -12
 			})
