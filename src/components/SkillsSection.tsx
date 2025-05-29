@@ -4,7 +4,6 @@ import {forwardRef, Ref, useRef} from "react";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-// gsap.registerPlugin(useGSAP);
 
 const SkillCard = forwardRef((props: any, ref: any) => {
 	return (
@@ -16,7 +15,7 @@ const SkillCard = forwardRef((props: any, ref: any) => {
 	)
 })
 
-export function SkillsSection () {
+export default function SkillsSection () {
 	const skillCardRef1 = useRef<HTMLDivElement>(null);
 	const skillCardRef2 = useRef<HTMLDivElement>(null);
 	const skillCardRef3 = useRef<HTMLDivElement>(null);
