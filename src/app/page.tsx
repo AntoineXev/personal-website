@@ -20,6 +20,7 @@ import { formatDate } from '@/lib/formatDate'
 import { ProjectExcerpt } from "@/components/ProjectExcerpt";
 import { BreadcrumbList, Graph, Person } from "schema-dts";
 import { Schema } from "@/components/Schema";
+import {HeroSection} from "@/components/HeroSection";
 
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -303,48 +304,38 @@ export default async function Home() {
   return (
     <>
       <Schema things={[person]} slug={''}/>
-      <Container className="px-0 pt-6 h-[calc(100vh-6rem)] overflow-hidden snap-center">
-        <div className="max-w-4xl mx-auto flex flex-col items-center  overflow-hidden">
-          <div className="bg-green-100 dark:bg-green-950 dark:text-green-600 text-green-800 px-4 py-2 rounded-full text-sm mb-6 flex items-center justify-center gap-2">
-            <div className="relative flex h-3 w-3">
-              <span
-                className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-green-600"></span>
-
-            </div>
-            Available
-          </div>
-          <h1 className="font-medium text-3xl leading-normal text-center tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Mobile & web designer, Developper, and entrepreneur
-          </h1>
-          <div className="flex gap-6 -mt-[5.5rem] -ml-16 rotate-6 w-[650px] transform md:max-w-lg">
-            <Image src={HeroImage} alt="iphone"/>
-          </div>
-        </div>
-
+      <HeroSection />
+      <Container>
+        <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'}
+                        subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'}
+                        image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'}
+                        href={'https://xev.agency'}/>
       </Container>
       <Container>
-        <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'} href={'https://xev.agency'} />
+        <ProjectExcerpt align={'right'} title={'Mon Livret C _ Gestionnaire de fonds en crypto-actifs'}
+                        subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'}
+                        image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'}
+                        buttonText={'En savoir plus'} href={'https://monlivretc.com'}/>
       </Container>
       <Container>
-        <ProjectExcerpt align={'right'} title={'Mon Livret C _ Gestionnaire de fonds en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
-      </Container>
-      <Container>
-        <ProjectExcerpt align={'center'} title={'Wodapp _ Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} imageAlt={'Application web et mobile de wodapp'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
+        <ProjectExcerpt align={'center'} title={'Wodapp _ Outil de réservation de séance de sport.'}
+                        subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'}
+                        imageAlt={'Application web et mobile de wodapp'} image={wodappImage}
+                        buttonText={'En savoir plus'} href={'https://wodapp.fr'}/>
       </Container>
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {articles.map((article) => (
-                <Article key={article.slug} article={article} />
+              <Article key={article.slug} article={article}/>
             ))}
           </div>
         </div>
       </Container>
       <Container>
         <div className="min-h-screen flex flex-col items-center lg:flex-row gap-10 md:gap-32 my-auto">
-          <Newsletter />
-          <Resume />
+          <Newsletter/>
+          <Resume/>
         </div>
       </Container>
     </>

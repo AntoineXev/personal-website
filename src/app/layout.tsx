@@ -7,7 +7,10 @@ import avatarImage from '@/images/avatar.jpg'
 
 import '@/styles/tailwind.css'
 import clsx from "clsx";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
+gsap.registerPlugin(useGSAP);
 const dmSans = DM_Sans({subsets: ['latin']})
 
 export const metadata: Metadata = {
@@ -42,11 +45,9 @@ export default function RootLayout ({
     return (
         <html lang="fr" className={clsx(dmSans.className, "h-full antialiased scroll-smooth overflow-x-hidden")}
               suppressHydrationWarning>
-        <body className="flex h-full bg-zinc-50 dark:bg-black">
+        <body className=" bg-zinc-50 dark:bg-black">
         <Providers>
-            <div className="flex w-full">
                 <Layout>{children}</Layout>
-            </div>
         </Providers>
         </body>
         </html>

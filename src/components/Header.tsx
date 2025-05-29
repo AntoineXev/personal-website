@@ -12,16 +12,71 @@ import {Button} from "@/components/Button";
 
 function AboutIcon (props: React.ComponentPropsWithoutRef<'svg'>) {
     return (
-      <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
           <rect width="256" height="256" fill="none"/>
-          <circle cx="128" cy="136" r="32" fill="none" stroke="currentColor" strokeLinecap="round"
-                  strokeLinejoin="round" strokeWidth="16"/>
-          <path d="M80,192a60,60,0,0,1,96,0" fill="none" stroke="currentColor" strokeLinecap="round"
+          <path
+            d="M54.46,201.54c-9.2-9.2-3.1-28.53-7.78-39.85C41.82,150,24,140.5,24,128s17.82-22,22.68-33.69C51.36,83,45.26,63.66,54.46,54.46S83,51.36,94.31,46.68C106.05,41.82,115.5,24,128,24S150,41.82,161.69,46.68c11.32,4.68,30.65-1.42,39.85,7.78s3.1,28.53,7.78,39.85C214.18,106.05,232,115.5,232,128S214.18,150,209.32,161.69c-4.68,11.32,1.42,30.65-7.78,39.85s-28.53,3.1-39.85,7.78C150,214.18,140.5,232,128,232s-22-17.82-33.69-22.68C83,204.64,63.66,210.74,54.46,201.54Z"
+            fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+          <circle cx="128" cy="180" r="12" fill="currentColor"/>
+          <path d="M128,144v-8c17.67,0,32-12.54,32-28s-14.33-28-32-28S96,92.54,96,108v4" fill="none" stroke="currentColor"
+                strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+      </svg>
+    )
+}
+function BlogIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+          <rect width="256" height="256" fill="none"/>
+          <rect x="48" y="40" width="64" height="176" rx="8" fill="none" stroke="currentColor" strokeLinecap="round"
                 strokeLinejoin="round" strokeWidth="16"/>
-          <rect x="32" y="48" width="192" height="160" rx="8" transform="translate(256) rotate(90)" fill="none"
-                stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
-          <line x1="96" y1="64" x2="160" y2="64" fill="none" stroke="currentColor" strokeLinecap="round"
+          <path
+            d="M217.67,205.77l-46.81,10a8,8,0,0,1-9.5-6.21L128.18,51.8a8.07,8.07,0,0,1,6.15-9.57l46.81-10a8,8,0,0,1,9.5,6.21L223.82,196.2A8.07,8.07,0,0,1,217.67,205.77Z"
+            fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="48" y1="72" x2="112" y2="72" fill="none" stroke="currentColor" strokeLinecap="round"
                 strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="48" y1="184" x2="112" y2="184" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="133.16" y1="75.48" x2="195.61" y2="62.06" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="139.79" y1="107.04" x2="202.25" y2="93.62" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="156.39" y1="185.94" x2="218.84" y2="172.52" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+      </svg>
+    )
+}
+function ProjectIcon (props: React.ComponentPropsWithoutRef<'svg'>) {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+          <rect width="256" height="256" fill="none"/>
+          <line x1="48" y1="184" x2="48" y2="72" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="208" y1="72" x2="208" y2="184" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="96" y1="128" x2="96" y2="144" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="128" y1="120" x2="128" y2="144" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="160" y1="112" x2="160" y2="144" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <rect x="32" y="40" width="192" height="32" rx="8" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <line x1="128" y1="184" x2="128" y2="216" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+          <circle cx="128" cy="232" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                  strokeWidth="16"/>
+          <line x1="32" y1="184" x2="224" y2="184" fill="none" stroke="currentColor" strokeLinecap="round"
+                strokeLinejoin="round" strokeWidth="16"/>
+      </svg>
+    )
+}
+function SetupIcon (props: React.ComponentPropsWithoutRef<'svg'>) {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+          <rect width="256" height="256" fill="none"/>
+          <path
+            d="M104,126.94a64,64,0,0,1,80-90.29L144,80l5.66,26.34L176,112l43.35-40a64,64,0,0,1-90.29,80L73,217A24,24,0,0,1,39,183Z"
+            fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
       </svg>
     )
 }
@@ -60,130 +115,16 @@ function clamp (number: number, a: number, b: number) {
 }
 
 export function Header () {
-    let isHomePage = usePathname() === '/'
-
-    let headerRef = useRef<React.ElementRef<'div'>>(null)
-    let isInitial = useRef(true)
-
-    useEffect(() => {
-        let downDelay = 0
-        let upDelay = 64
-
-        function setProperty (property: string, value: string) {
-            document.documentElement.style.setProperty(property, value)
-        }
-
-        function removeProperty (property: string) {
-            document.documentElement.style.removeProperty(property)
-        }
-
-        function updateHeaderStyles () {
-            if (!headerRef.current) {
-                return
-            }
-
-            let {top, height} = headerRef.current.getBoundingClientRect()
-            let scrollY = clamp(
-                window.scrollY,
-                0,
-                document.body.scrollHeight - window.innerHeight,
-            )
-
-            if (isInitial.current) {
-                setProperty('--header-position', 'sticky')
-            }
-
-            setProperty('--content-offset', `${downDelay}px`)
-
-            if (isInitial.current || scrollY < downDelay) {
-                setProperty('--header-height', `${downDelay + height}px`)
-                setProperty('--header-mb', `${-downDelay}px`)
-            }
-            else if (top + height < -upDelay) {
-                let offset = Math.max(height, scrollY - upDelay)
-                setProperty('--header-height', `${offset}px`)
-                setProperty('--header-mb', `${height - offset}px`)
-            }
-            else if (top === 0) {
-                setProperty('--header-height', `${scrollY + height}px`)
-                setProperty('--header-mb', `${-scrollY}px`)
-            }
-
-            if (top === 0 && scrollY > 0 && scrollY >= downDelay) {
-                setProperty('--header-inner-position', 'fixed')
-                removeProperty('--header-top')
-                removeProperty('--avatar-top')
-            }
-            else {
-                removeProperty('--header-inner-position')
-                setProperty('--header-top', '0px')
-                setProperty('--avatar-top', '0px')
-            }
-        }
-
-        function updateAvatarStyles () {
-            if (!isHomePage) {
-                return
-            }
-
-            let fromScale = 1
-            let toScale = 36 / 64
-            let fromX = 0
-            let toX = 2 / 16
-
-            let scrollY = downDelay - window.scrollY
-
-            let scale = ( scrollY * ( fromScale - toScale ) ) / downDelay + toScale
-            scale = clamp(scale, fromScale, toScale)
-
-            let x = ( scrollY * ( fromX - toX ) ) / downDelay + toX
-            x = clamp(x, fromX, toX)
-
-            setProperty(
-                '--avatar-image-transform',
-                `translate3d(${x}rem, 0, 0) scale(${scale})`,
-            )
-
-            let borderScale = 1 / ( toScale / scale )
-            let borderX = ( -toX + x ) * borderScale
-            let borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
-
-            setProperty('--avatar-border-transform', borderTransform)
-            setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')
-        }
-
-        function updateStyles () {
-            updateHeaderStyles()
-            updateAvatarStyles()
-            isInitial.current = false
-        }
-
-        updateStyles()
-        window.addEventListener('scroll', updateStyles, {passive: true})
-        window.addEventListener('resize', updateStyles)
-
-        return () => {
-            window.removeEventListener('scroll', updateStyles)
-            window.removeEventListener('resize', updateStyles)
-        }
-    }, [isHomePage])
-
     return (
       <>
           <header
-            className="pointer-events-none relative z-50 flex flex-none flex-col"
+            className="fixed left-0 right-0 top-2 pointer-events-none z-50 flex flex-none flex-col"
             style={{
-                height: 'var(--header-height)',
                 marginBottom: 'var(--header-mb)',
             }}
           >
               <div
-                ref={headerRef}
                 className="top-0 z-10 h-24 pt-6"
-                style={{
-                    position:
-                      'var(--header-position)' as React.CSSProperties['position'],
-                }}
               >
                   <Container
                     className="top-[var(--header-top,theme(spacing.6))] w-full"
@@ -208,11 +149,11 @@ export function Header () {
                                       <div className="border-r-2 dark:border-white/20 my-2"></div>
                                       <NavItem href="/about"><AboutIcon
                                         className="h-10 w-10"/></NavItem>
-                                      <NavItem href="/articles"><AboutIcon
+                                      <NavItem href="/articles"><BlogIcon
                                         className="h-10 w-10 text-white stroke-white"/></NavItem>
-                                      <NavItem href="/projects"><AboutIcon
+                                      <NavItem href="/projects"><ProjectIcon
                                         className="h-10 w-10 text-white stroke-white"/></NavItem>
-                                      <NavItem href="/uses"><AboutIcon
+                                      <NavItem href="/uses"><SetupIcon
                                         className="h-10 w-10 text-white stroke-white"/></NavItem>
                                       <div className="border-r-2 dark:border-white/20 my-2 hidden md:block"></div>
                                       <Button hasArrow className="hidden md:flex">Discutons</Button>
@@ -226,12 +167,6 @@ export function Header () {
           <div className="md:hidden fixed bottom-4 left-0 right-0 flex items-center justify-center  z-50">
               <Button className="text-base font-medium" hasArrow>Discutons ensemble</Button>
           </div>
-          {isHomePage && (
-            <div
-              className="flex-none"
-              style={{height: 'var(--content-offset)'}}
-            />
-          )}
       </>
     )
 }
