@@ -3,14 +3,10 @@ import { type Metadata } from 'next'
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 import { DM_Sans } from 'next/font/google'
-import avatarImage from '@/images/avatar.jpg'
 
 import '@/styles/tailwind.css'
 import clsx from "clsx";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP);
 const dmSans = DM_Sans({subsets: ['latin']})
 
 export const metadata: Metadata = {

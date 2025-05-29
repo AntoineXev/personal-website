@@ -2,10 +2,12 @@
 import {Container} from "@/components/Container";
 import Image from "next/image";
 import HeroImage from "@/images/hero-image.png";
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import {useRef} from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";// Import ScrollTrigger
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 export function HeroSection() {
 	const imageRef = useRef<HTMLDivElement>(null);
@@ -19,7 +21,7 @@ export function HeroSection() {
 				trigger: pinRef.current,  // Target the box element
 				start: 'top top',    // Trigger when the top of the box hits the center of the viewport
 				end: 'center top',      // End when the bottom of the box reaches the top of the viewport
-				scrub: true, // Enable smooth scrolling for the animation
+				scrub: 1, // Enable smooth scrolling for the animation
 			},
 		});
 	});
