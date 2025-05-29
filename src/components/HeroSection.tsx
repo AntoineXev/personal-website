@@ -14,7 +14,7 @@ export function HeroSection() {
 	const pinRef = useRef<HTMLDivElement>(null);
 	useGSAP(() => {
 		gsap.registerPlugin(ScrollTrigger); // Register ScrollTrigger plugin
-		gsap.to(imageRef.current, {
+		const tween = gsap.to(imageRef.current, {
 			y: '-28%',
 			scrollTrigger: {
 				pin: pinRef.current,
@@ -23,7 +23,8 @@ export function HeroSection() {
 				end: 'center top',      // End when the bottom of the box reaches the top of the viewport
 				scrub: true, // Enable smooth scrolling for the animation
 				anticipatePin: 1,
-			},
+				fastScrollEnd: true,
+			}
 		});
 	});
 	return (
