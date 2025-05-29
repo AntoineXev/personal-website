@@ -7,13 +7,13 @@ function FeatureCard({dashClasses}: { dashClasses?: string }) {
 				<Icon />
 				<h3 className="mt-auto text-base font-medium">Build MVP</h3>
 			</div>
-			<DashSeparator className={clsx("text-gray-300 mt-auto", dashClasses)}/>
+			<DashSeparator className={clsx("mt-auto", dashClasses)}/>
 		</div>
 	)
 }
 
 function MvpIcon() {
-	return (<svg className="group-hover:translate-x-0.5 group-hover:rotate-12 animate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+	return (<svg className="group-hover:translate-x-0.5 group-hover:rotate-12 animate " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
 		<rect width="256" height="256" fill="none"/>
 		<path
 			d="M176,176a48,48,0,1,1,25.85-88.64A4,4,0,0,0,208,84V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V208a8,8,0,0,0,8,8H200a8,8,0,0,0,8-8V172a4,4,0,0,0-6.12-3.38C193.9,173.74,186.27,176.41,176,176Z"
@@ -23,7 +23,7 @@ function MvpIcon() {
 
 function Icon() {
 	return(
-		<div className="bg-gray-900 shadow-zinc-900/30 shadow-md h-16 w-16 rounded-2xl p-3 text-zinc-200">
+		<div className="dark:bg-zinc-100 bg-gray-900 shadow-zinc-900/30 shadow-md dark:shadow-zinc-50/20 h-16 w-16 rounded-2xl p-3 text-zinc-200 dark:text-zinc-900">
 			<MvpIcon />
 		</div>
 	)
@@ -32,7 +32,7 @@ function Icon() {
 function DashSeparator(props: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div {...props}>
-			<svg width="4268" height="2" fill="none" id="svg-1020161455_141">
+			<svg width="4268" height="2" fill="none" id="svg-1020161455_141" className="text-gray-300 dark:text-gray-600">
 				<path stroke="currentColor" strokeDasharray="9 8" d="M.5 1h4267"></path>
 			</svg>
 		</div>
@@ -50,7 +50,7 @@ export function FeaturesSection() {
 				<DashSeparator className="text-gray-300"/>
 				<div className="flex items-center ">
 					<div className="mx-auto w-full max-w-7xl px-4 md:px-28 overflow-hidden">
-						<DashSeparator className="text-gray-300 rotate-90 -translate-x-1/2"/>
+						<DashSeparator className="rotate-90 -translate-x-1/2"/>
 						<DashSeparator className="text-gray-300 rotate-90 hidden md:block"/>
 
 						<DashSeparator className="text-gray-300 rotate-90 translate-x-1/2"/>
@@ -62,7 +62,7 @@ export function FeaturesSection() {
 						</div>
 					</div>
 				</div>
-				<DashSeparator className="text-gray-300"/>
+				<DashSeparator/>
 			</div>
 		</section>
 	</>)
