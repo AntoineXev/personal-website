@@ -21,13 +21,14 @@ export function HeroSection() {
 				trigger: pinRef.current,  // Target the box element
 				start: 'top top',    // Trigger when the top of the box hits the center of the viewport
 				end: 'center top',      // End when the bottom of the box reaches the top of the viewport
-				scrub: 1, // Enable smooth scrolling for the animation
+				scrub: true, // Enable smooth scrolling for the animation
+				anticipatePin: 1,
 			},
 		});
 	});
 	return (
-		<>
-			<Container className="px-0 pt-36 h-[100vh] overflow-hidden snap-center" ref={pinRef}>
+		<div ref={pinRef}>
+			<Container className="px-0 pt-36 h-[100vh] overflow-hidden snap-center" >
 				<div className="max-w-4xl mx-auto flex flex-col items-center">
 					<div
 						className="bg-green-100 dark:bg-green-950 dark:text-green-600 text-green-800 px-4 py-2 rounded-full text-sm mb-6 flex items-center justify-center gap-2">
@@ -48,7 +49,7 @@ export function HeroSection() {
 					</div>
 				</div>
 			</Container>
-			<div className="relative w-full h-16 z-10   border-t   border-gray-200" style={{boxShadow:  '0px -15px 15px rgba(0, 0, 0, 0.2);'}}></div>
-		</>
+			<div className="relative w-full h-16 z-10   border-t   border-gray-200 dark:border-gray-800" style={{boxShadow:  '0px -15px 15px rgba(0, 0, 0, 0.2);'}}></div>
+		</div>
 	)
 }
