@@ -6,10 +6,11 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 const SkillCard = forwardRef((props: any, ref: any) => {
+	const { label, ...otherProps } = props;
 	return (
-		<div ref={ref} {...props} className={clsx("relative shadow-xl dark:bg-gray-900 rounded-xl p-3 bg-zinc-50", props.className)}>
+		<div ref={ref} {...otherProps} className={clsx("relative shadow-xl dark:bg-gray-900 rounded-xl p-3 bg-zinc-50", props.className)}>
 			<p className="rounded-md p-3 border border-amber-100 bg-amber-50 text-xl text-amber-500 dark:border-none dark:bg-amber-900">
-				Product Design
+				{label}
 			</p>
 		</div>
 	)
@@ -79,10 +80,10 @@ export function SkillsSection () {
 				Top skills
 			</h2>
 			<div className="absolute overflow-hidden grid-rows-4 grid-cols-1 md:grid-cols-2 grid md:grid-rows-2 left-0 right-0 bottom-0 top-0 z-10">
-				<SkillCard ref={skillCardRef1} className="m-auto -translate-x-[200%]"/>
-				<SkillCard ref={skillCardRef2} className="m-auto translate-x-[200%]"/>
-				<SkillCard ref={skillCardRef3} className="m-auto -translate-x-[200%]"/>
-				<SkillCard ref={skillCardRef4} className="m-auto translate-x-[200%]"/>
+				<SkillCard ref={skillCardRef1} className="m-auto -translate-x-[200%]" label="Design Produit"/>
+				<SkillCard ref={skillCardRef2} className="m-auto translate-x-[200%]"  label="Pilotage de projets"/>
+				<SkillCard ref={skillCardRef3} className="m-auto -translate-x-[200%]" label="Data manipulation"/>
+				<SkillCard ref={skillCardRef4} className="m-auto translate-x-[200%]" label="Direction produit"/>
 			</div>
 		</section>
 

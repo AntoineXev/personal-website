@@ -2,7 +2,7 @@
 import {Container} from "@/components/Container";
 import Image from "next/image";
 import HeroImage from "@/images/hero-image.png";
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -10,13 +10,28 @@ gsap.registerPlugin(useGSAP);
 
 export function HeroSection() {
 	const imageRef = useRef<HTMLDivElement>(null);
+	const [isMobile, setIsMobile] = useState<boolean>(false);
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const handleResize = () => {
+				if(window?.innerWidth >= 768) {
+					setIsMobile(false)
+				} else {
+					setIsMobile(true)
+				}
+			};
+			handleResize()
+		}
+	}, []);
 	useGSAP(() => {
 		gsap.to(imageRef.current, {
-			y: '-535px',
+			y: isMobile ? '-530px': '-565px',
 			rotation:10,
+			delay: 1,
+			duration: 0.5,
 			transformOrigin:"left 50%"
 		});
-	});
+	},  { dependencies: [isMobile], revertOnUpdate: true});
 	return (
 		<>
 			<Container className="px-0 pt-36 h-[100vh] overflow-hidden snap-center" >
@@ -35,7 +50,7 @@ export function HeroSection() {
 						className="font-medium text-3xl leading-normal text-center tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
 						Mobile & web designer, Developper, and entrepreneur
 					</h1>
-					<div className="flex gap-6 w-[650px] mt-96 md:max-w-lg z-0" ref={imageRef}>
+					<div className="flex gap-6 w-[600px] mt-96 md:w-[800px] z-0" ref={imageRef}>
 						<Image src={HeroImage} alt="iphone" />
 					</div>
 				</div>
