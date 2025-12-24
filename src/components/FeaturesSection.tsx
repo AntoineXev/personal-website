@@ -32,8 +32,8 @@ function Icon() {
 function DashSeparator(props: React.ComponentPropsWithoutRef<'div'>) {
 	return (
 		<div {...props}>
-			<svg width="4268" height="2" fill="none" id="svg-1020161455_141" className="text-gray-300 dark:text-gray-600">
-				<path stroke="currentColor" strokeDasharray="9 8" d="M.5 1h4267"></path>
+			<svg width="4268" height="3" fill="none" id="svg-1020161455_141" className="text-zinc-200 dark:text-zinc-800">
+				<path stroke="currentColor" strokeDasharray="9 8" strokeWidth="1.5" d="M.5 1.5h4267"></path>
 			</svg>
 		</div>
 	)
@@ -47,13 +47,13 @@ export function FeaturesSection() {
 				<p className="text-base text-gray-500">Here is the kind of problems that I solve on a daily baisis</p>
 			</div>
 			<div className="w-full ">
-				<DashSeparator className="text-gray-300"/>
+				<DashSeparator className="text-zinc-200"/>
 				<div className="flex items-center ">
 					<div className="mx-auto w-full max-w-7xl px-4 md:px-28 overflow-hidden">
 						<DashSeparator className="rotate-90 -translate-x-1/2"/>
-						<DashSeparator className="text-gray-300 rotate-90 hidden md:block"/>
+						<DashSeparator className="text-zinc-200 rotate-90 hidden md:block"/>
 
-						<DashSeparator className="text-gray-300 rotate-90 translate-x-1/2"/>
+						<DashSeparator className="text-zinc-200 rotate-90 translate-x-1/2"/>
 						<div className="grid-cols-1 md:grid-cols-2 grid grid-rows-2">
 							<FeatureCard/>
 							<FeatureCard/>

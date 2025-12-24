@@ -12,17 +12,15 @@ import logoMLC from '@/images/logos/mlc.svg'
 import logoXev from '@/images/logos/xev.svg'
 import logoBloom from '@/images/logos/bloom.svg'
 import logoWeblaunch from '@/images/logos/weblaunch.svg'
-import mlcAppImage from '@/images/mlc-apps.png'
-import wodappImage from '@/images/wodapp.png'
 import HeroImage from '@/images/hero-image.png'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
-import { ProjectExcerpt } from "@/components/ProjectExcerpt";
 import { BreadcrumbList, Graph, Person } from "schema-dts";
 import { Schema } from "@/components/Schema";
 import {HeroSection} from "@/components/HeroSection";
 import {FeaturesSection} from "@/components/FeaturesSection";
 import {SkillsSection} from "@/components/SkillsSection";
+import {ProjectsSection} from "@/components/ProjectsSection";
 
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -295,24 +293,7 @@ export default async function Home() {
       <HeroSection />
       <FeaturesSection />
       <SkillsSection />
-      <Container>
-        <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'}
-                        subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'}
-                        image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'}
-                        href={'https://xev.agency'}/>
-      </Container>
-      <Container>
-        <ProjectExcerpt align={'right'} title={'Mon Livret C _ Gestionnaire de fonds en crypto-actifs'}
-                        subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'}
-                        image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'}
-                        buttonText={'En savoir plus'} href={'https://monlivretc.com'}/>
-      </Container>
-      <Container>
-        <ProjectExcerpt align={'center'} title={'Wodapp _ Outil de réservation de séance de sport.'}
-                        subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'}
-                        imageAlt={'Application web et mobile de wodapp'} image={wodappImage}
-                        buttonText={'En savoir plus'} href={'https://wodapp.fr'}/>
-      </Container>
+      <ProjectsSection />
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">

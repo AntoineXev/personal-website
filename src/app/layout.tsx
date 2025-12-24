@@ -41,7 +41,7 @@ export default function RootLayout ({
     return (
         <html lang="fr" className={clsx(dmSans.className, "h-full antialiased scroll-smooth overflow-x-hidden")}
               suppressHydrationWarning>
-        <body className=" bg-zinc-50 dark:bg-black overflow-hidden">
+        <body className=" bg-white dark:bg-black overflow-hidden">
         <Providers>
                 <Layout>{children}</Layout>
         </Providers>
