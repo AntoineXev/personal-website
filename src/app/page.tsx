@@ -18,6 +18,7 @@ import { formatDate } from '@/lib/formatDate'
 import { BreadcrumbList, Graph, Person } from "schema-dts";
 import { Schema } from "@/components/Schema";
 import {HeroSection} from "@/components/HeroSection";
+import {AboutMeSection} from "@/components/AboutMeSection";
 import {FeaturesSection} from "@/components/FeaturesSection";
 import {SkillsSection} from "@/components/SkillsSection";
 import {ProjectsSection} from "@/components/ProjectsSection";
@@ -291,6 +292,7 @@ export default async function Home() {
     <>
       <Schema things={[person]} slug={''}/>
       <HeroSection />
+      <AboutMeSection />
       <FeaturesSection />
       <SkillsSection />
       <ProjectsSection />

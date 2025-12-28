@@ -156,7 +156,7 @@ export function Header () {
                                       <NavItem href="/uses"><SetupIcon
                                         className="h-10 w-10 text-white stroke-white"/></NavItem>
                                       <div className="border-r-2 dark:border-white/20 my-2 hidden md:block"></div>
-                                      <Button hasArrow className="hidden md:flex">Discutons</Button>
+                                      <Button hasArrow className="hidden md:flex text-lg">Discutons</Button>
                                   </ul>
                               </nav>
                           </div>
