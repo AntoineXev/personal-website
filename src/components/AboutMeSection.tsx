@@ -49,19 +49,19 @@ export function AboutMeSection() {
   const cards = [
     {
       ...gallery[0],
-      className: '',
+      className: 'pt-10 ',
     },
     {
       ...gallery[1],
-      className: 'col-start-8 md:col-start-9 row-start-2 pt-10',
+      className: 'col-start-7 md:col-start-9 row-start-2 pt-10 md:pt-20',
     },
     {
       ...gallery[2],
-      className: 'col-start-3 md:col-start-3 row-start-3 pt-10',
+      className: 'col-start-3 md:col-start-3 row-start-3 pt-10 md:pt-20',
     },
     {
       ...gallery[3],
-      className: 'col-start-6 md:col-start-6 row-start-4 pt-10',
+      className: 'col-start-5 md:col-start-6 row-start-4 pt-10 md:pt-20',
     },
   ]
 
@@ -85,8 +85,8 @@ export function AboutMeSection() {
       cardsRef.current.forEach((card, idx) => {
         if (!card) return
 
-        const fromY = () => window.innerHeight 
-        const toY = () => - window.innerHeight
+        const fromY = () => 0
+        const toY = () => 0
 
         timeline.fromTo(
           card,
@@ -104,7 +104,7 @@ export function AboutMeSection() {
       			<div className="relative w-full h-16 z-10   border-t   border-gray-200 dark:border-gray-800" style={{boxShadow:  '0px -15px 15px rgba(0, 0, 0, 0.2)'}}></div>
             <section
       id="aboutme-section"
-      className="relative h-[300vh]"
+      className="relative h-[500vh]"
     >
 
       {/* Layer des cartes qui tombent au-dessus du texte */}
@@ -115,13 +115,13 @@ export function AboutMeSection() {
               <div
                 key={item.title}
                 ref={(el) => (cardsRef.current[idx] = el)}
-                className={`pointer-events-none col-span-5 md:col-span-3 ${item.className} will-change-transform`}
+                className={`pointer-events-none col-span-6 md:col-span-3 ${item.className} will-change-transform`}
               >
                 <LiquidGlass as="div"
                   blur={1}
-                  style={{ '--glass-padding': '1rem',  '--glass-bg': 'rgba(255, 255, 255, 0.59)' } as React.CSSProperties}
-                className="flex flex-col rounded-2xl  p-1 shadow-xl shadow-zinc-900/5 dark:border-zinc-700/50 dark:bg-zinc-900">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-zinc-100 dark:border-zinc-700/60">
+                  style={{ '--glass-padding': '1rem',  '--glass-bg': 'rgba(255, 255, 255, 0)' } as React.CSSProperties}
+                className="flex flex-col rounded-2xl  p-1 shadow-xl shadow-zinc-900/5">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -145,7 +145,7 @@ export function AboutMeSection() {
         ref={pinTextRef}
           className="sticky top-6 z-10 mx-auto flex min-h-[75vh] max-w-4xl flex-col items-center justify-center gap-6 text-center rounded-3xl bg-white/95 p-8 backdrop-blur-sm dark:bg-zinc-950/90"
         >
-          <div className="inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-600 shadow-sm backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-900/70 dark:text-zinc-300">
+          <div className="inline-flex items-center gap-3 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-600 shadow-sm backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-900/70 dark:text-zinc-300">
             Bonjour, moi c&apos;est Antoine
           </div>
           <h2 className="text-2xl font-serif leading-relaxed italic font-medium leading-tight tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl">

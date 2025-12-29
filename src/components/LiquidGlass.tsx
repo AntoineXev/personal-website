@@ -64,6 +64,8 @@ export function LiquidGlassDefs ({
 type LiquidGlassProps<E extends React.ElementType = 'div'> = {
     as?: E
     blur?: number
+    bgLight?: string
+    bgDark?: string
     className?: string
     style?: React.CSSProperties
     children?: React.ReactNode
@@ -72,6 +74,8 @@ type LiquidGlassProps<E extends React.ElementType = 'div'> = {
 export function LiquidGlass<E extends React.ElementType = 'div'> ({
                                                                       as,
                                                                       blur = 1,
+                                                                      bgLight,
+                                                                      bgDark,
                                                                       className,
                                                                       style,
                                                                       children,
@@ -85,6 +89,12 @@ export function LiquidGlass<E extends React.ElementType = 'div'> ({
         style={{
             ...style,
             ['--glass-blur' as const]: `${blur}px`,
+            ...(bgLight ? { ['--glass-bg-light' as const]: bgLight } : null),
+            ...(bgDark
+                ? { ['--glass-bg-dark' as const]: bgDark }
+                : bgLight
+                    ? { ['--glass-bg-dark' as const]: `color-mix(in srgb, black 85%, ${bgLight} 15%)` }
+                    : null),
         } as React.CSSProperties}
         {...rest}
       >

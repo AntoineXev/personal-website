@@ -10,9 +10,9 @@ const SkillCard = forwardRef((props: any, ref: any) => {
 	const { label, ...otherProps } = props;
 	return (
 			<div ref={ref} {...otherProps} className={props.className}>
-			<LiquidGlass  as="div" blur={1.5} style={{ '--glass-padding': '1rem', '--glass-bg': 'rgba(255, 255, 255, 0.59)' } as React.CSSProperties} className={clsx("relative dark:bg-gray-900 rounded-[999px] p-3 md:p-5", )}>
+			<LiquidGlass  as="div" blur={1} style={{ '--glass-padding': '1rem', '--glass-bg': 'rgba(255, 255, 255, 0)' } as React.CSSProperties} className="relative rounded-[999px] p-3 md:p-5">
 
-			<p className="rounded-3xl text-2xl text-amber-800 dark:border-none dark:bg-amber-900">
+			<p className="rounded-3xl text-2xl text-amber-800 dark:text-amber-300">
 				{label}
 			</p>
 			</LiquidGlass>
@@ -61,24 +61,24 @@ export function SkillsSection () {
 		tl.addLabel('start')
 			.to(skillCardRef1.current, {
 				x: isMobile ? '20' : '20%',
-				y: isMobile ? '220%':'210%',
-				rotation: isMobile ? -8: 16,
+				y: isMobile ? '220%':'170%',
+				rotation: isMobile ? -8: 12,
 			})
 			.addLabel('2nd icon')
 			.to(skillCardRef2.current, {
-				x: isMobile ?'-10%': '-55%',
-				y: isMobile ? '20%':'230%',
+				x: isMobile ?'-10%': '-35%',
+				y: isMobile ? '20%':'160%',
 				rotation: isMobile ? 12: -12
 			})
 			.to(skillCardRef3.current, {
 				x: isMobile ? '0%': '50%',
-				y: isMobile ? '-150%': '-230%',
+				y: isMobile ? '-150%': '-180%',
 				rotation:-10
 			})
 			.to(skillCardRef4.current, {
-				x: isMobile ?'-10%': '-100%',
-				y: '-240%',
-				rotation:20
+				x: isMobile ?'-10%': '-50%',
+				y: isMobile ? '-240%':'-180%',
+				rotation:4
 			})
 			.addLabel('end');
 	}, { dependencies: [isMobile], revertOnUpdate: true});
