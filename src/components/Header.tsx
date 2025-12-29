@@ -81,6 +81,48 @@ function SetupIcon (props: React.ComponentPropsWithoutRef<'svg'>) {
     )
 }
 
+function LiquidGlassFilterDefs () {
+    return (
+      <svg aria-hidden className="pointer-events-none absolute h-0 w-0 select-none">
+          <defs>
+              <filter
+                id="header-liquid-glass-filter"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+                filterUnits="objectBoundingBox"
+                colorInterpolationFilters="sRGB"
+              >
+                  <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.20 0.10"
+                    numOctaves="2"
+                    seed="12"
+                    result="noise"
+                  />
+                  <feGaussianBlur in="noise" stdDeviation="6" result="smoothedNoise"/>
+                  <feColorMatrix in="smoothedNoise" type="saturate" values="0" result="monoNoise"/>
+                  <feComponentTransfer in="monoNoise" result="heightMap">
+                      <feFuncR type="gamma" amplitude="1.05" exponent="0.9" offset="0"/>
+                      <feFuncG type="gamma" amplitude="1.05" exponent="0.9" offset="0"/>
+                      <feFuncB type="gamma" amplitude="1.05" exponent="0.9" offset="0"/>
+                  </feComponentTransfer>
+                  <feDisplacementMap
+                    in="SourceGraphic"
+                    in2="heightMap"
+                    scale="70"
+                    xChannelSelector="R"
+                    yChannelSelector="G"
+                    result="displacement"
+                  />
+                  <feComposite in="displacement" in2="SourceGraphic" operator="atop"/>
+              </filter>
+          </defs>
+      </svg>
+    )
+}
+
 function NavItem ({
                       href,
                       children,
@@ -117,6 +159,7 @@ function clamp (number: number, a: number, b: number) {
 export function Header () {
     return (
       <>
+          <LiquidGlassFilterDefs />
           <header
             className="fixed left-0 right-0 top-2 pointer-events-none z-50 flex flex-none flex-col"
             style={{
@@ -137,7 +180,7 @@ export function Header () {
                           <div className="flex flex-1 justify-center">
                               <nav className="pointer-events-auto">
                                   <ul
-                                    className="flex items-stretch rounded-3xl p-2 gap-3 bg-white/70 text-sm font-medium text-zinc-800  ring-2 ring-zinc-900/5 backdrop-blur-md dark:bg-zinc-800/70 dark:text-zinc-200 dark:ring-white/20">
+                                    className="liquid-glass flex items-stretch rounded-3xl p-2 gap-3 text-sm font-medium text-zinc-800 dark:text-zinc-200">
                                       <Link
                                         href="/"
                                         aria-label="Home"
