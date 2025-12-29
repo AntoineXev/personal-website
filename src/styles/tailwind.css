@@ -5,14 +5,19 @@
 
 @layer components {
   .liquid-glass {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 14px 46px rgba(15, 23, 42, 0.32);
+    --glass-padding: 0.65rem;
+    --glass-blur: 1px;
     position: relative;
     overflow: hidden;
-    padding: 0.65rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 14px 46px rgba(15, 23, 42, 0.32);
-    backdrop-filter: url('#header-liquid-glass-filter') blur(1px);
-    -webkit-backdrop-filter: url('#header-liquid-glass-filter') blur(1px);
+    padding: var(--glass-padding);
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: url('#liquid-glass-filter') blur(var(--glass-blur));
+    -webkit-backdrop-filter: url('#liquid-glass-filter') blur(var(--glass-blur));
     transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   }
 
@@ -39,19 +44,19 @@
   }
 
   .liquid-glass:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.35);
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.35);
     box-shadow: 0 18px 52px rgba(15, 23, 42, 0.38);
   }
 
   .dark .liquid-glass {
-    background: rgba(17, 17, 17, 0.5);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 16px 52px rgba(0, 0, 0, 0.55);
+    --glass-bg: rgba(17, 17, 17, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-shadow: 0 16px 52px rgba(0, 0, 0, 0.55);
   }
 
   .dark .liquid-glass:hover {
-    background: rgba(17, 17, 17, 0.64);
-    border-color: rgba(255, 255, 255, 0.18);
+    --glass-bg: rgba(17, 17, 17, 0.64);
+    --glass-border: rgba(255, 255, 255, 0.18);
   }
 }

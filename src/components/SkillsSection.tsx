@@ -4,15 +4,21 @@ import {forwardRef, Ref, useEffect, useRef, useState} from "react";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { LiquidGlass } from "./LiquidGlass";
 
 const SkillCard = forwardRef((props: any, ref: any) => {
 	const { label, ...otherProps } = props;
 	return (
-		<div ref={ref} {...otherProps} className={clsx("relative shadow-xl dark:bg-gray-900 rounded-xl p-3 bg-zinc-50", props.className)}>
-			<p className="rounded-md p-3 border border-amber-100 bg-amber-50 text-xl text-amber-500 dark:border-none dark:bg-amber-900">
+			<div ref={ref} {...otherProps} className={props.className}>
+			<LiquidGlass  as="div" blur={1.5} style={{ '--glass-padding': '1rem', '--glass-bg': 'rgba(255, 255, 255, 0.59)' } as React.CSSProperties} className={clsx("relative dark:bg-gray-900 rounded-[999px] p-3 md:p-5", )}>
+
+			<p className="rounded-3xl text-2xl text-amber-800 dark:border-none dark:bg-amber-900">
 				{label}
 			</p>
+			</LiquidGlass>
+
 		</div>
+	
 	)
 })
 
@@ -39,8 +45,11 @@ export function SkillsSection () {
 	}, []);
 	useGSAP(() => {
 		gsap.registerPlugin(ScrollTrigger);
+
 		const tl = gsap.timeline({
+			id: 'skills-tl',
 			scrollTrigger: {
+				id: 'skills-pin',
 				trigger: pinRef.current,
 				pin: pinRef.current,
 				start: 'top top',    // Trigger when the top of the box hits the center of the viewport
@@ -51,30 +60,30 @@ export function SkillsSection () {
 		})
 		tl.addLabel('start')
 			.to(skillCardRef1.current, {
-			x: isMobile ? '0' : '60%',
-			y: isMobile ? '50%':'70%',
-			rotation: isMobile ? -8: 16,
-		})
+				x: isMobile ? '20' : '20%',
+				y: isMobile ? '220%':'210%',
+				rotation: isMobile ? -8: 16,
+			})
 			.addLabel('2nd icon')
 			.to(skillCardRef2.current, {
-				x: isMobile ?'-20%': '-85%',
-				y: isMobile ? '-90%':'-70%',
+				x: isMobile ?'-10%': '-55%',
+				y: isMobile ? '20%':'230%',
 				rotation: isMobile ? 12: -12
 			})
 			.to(skillCardRef3.current, {
 				x: isMobile ? '0%': '50%',
-				y: '-150%',
+				y: isMobile ? '-150%': '-230%',
 				rotation:-10
 			})
 			.to(skillCardRef4.current, {
-				x: isMobile ?'-10%': '-50%',
-				y: '-150%',
+				x: isMobile ?'-10%': '-100%',
+				y: '-240%',
 				rotation:20
 			})
 			.addLabel('end');
 	}, { dependencies: [isMobile], revertOnUpdate: true});
 	return (
-		<section ref={pinRef} className="h-screen z-0 relative overflow-hidden flex flex-col items-center justify-center">
+		<section id="skills-section" ref={pinRef} className="h-screen z-0 relative overflow-hidden flex flex-col items-center justify-center">
 			<h2
 				className="font-medium text-9xl leading-normal text-center tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-9xl">
 				Top skills

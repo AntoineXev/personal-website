@@ -10,6 +10,7 @@ import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
+import { LiquidGlass } from './LiquidGlass'
 
 const gallery = [
   {
@@ -52,15 +53,15 @@ export function AboutMeSection() {
     },
     {
       ...gallery[1],
-      className: 'col-start-10 row-start-2',
+      className: 'col-start-8 md:col-start-9 row-start-2 pt-10',
     },
     {
       ...gallery[2],
-      className: 'col-start-3 row-start-3',
+      className: 'col-start-3 md:col-start-3 row-start-3 pt-10',
     },
     {
       ...gallery[3],
-      className: 'col-start-8 row-start-4',
+      className: 'col-start-6 md:col-start-6 row-start-4 pt-10',
     },
   ]
 
@@ -108,15 +109,18 @@ export function AboutMeSection() {
 
       {/* Layer des cartes qui tombent au-dessus du texte */}
       <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-        <div className="relative w-full px-28">
+        <div className="relative w-full px-6 md:px-28">
           <div className="relative grid grid-flow-col grid-rows-4 w-full grid-cols-12 gap-3">
             {cards.map((item, idx) => (
               <div
                 key={item.title}
                 ref={(el) => (cardsRef.current[idx] = el)}
-                className={`pointer-events-none w-44 sm:w-52 lg:w-64 ${item.className} will-change-transform`}
+                className={`pointer-events-none col-span-5 md:col-span-3 ${item.className} will-change-transform`}
               >
-                <div className="flex flex-col rounded-2xl border border-zinc-200 bg-white p-1 shadow-lg shadow-zinc-900/5 dark:border-zinc-700/50 dark:bg-zinc-900">
+                <LiquidGlass as="div"
+                  blur={1}
+                  style={{ '--glass-padding': '1rem',  '--glass-bg': 'rgba(255, 255, 255, 0.59)' } as React.CSSProperties}
+                className="flex flex-col rounded-2xl  p-1 shadow-xl shadow-zinc-900/5 dark:border-zinc-700/50 dark:bg-zinc-900">
                   <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-zinc-100 dark:border-zinc-700/60">
                     <Image
                       src={item.image}
@@ -129,7 +133,7 @@ export function AboutMeSection() {
                   <div className="px-2 pt-1 pb-1 text-left">
                     <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{item.subtitle}</p>
                   </div>
-                </div>
+                </LiquidGlass>
               </div>
             ))}
           </div>
@@ -144,9 +148,8 @@ export function AboutMeSection() {
           <div className="inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-600 shadow-sm backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-900/70 dark:text-zinc-300">
             Bonjour, moi c&apos;est Antoine
           </div>
-          <h2 className="text-xl font-serif font-italic font-medium leading-tight tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl">
-            Je crée des sites qui inspirent confiance et convertissent
-          </h2>
+          <h2 className="text-2xl font-serif leading-relaxed italic font-medium leading-tight tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl">
+          Ce qui m'interesse, c'est la manière dont on construit des choses (des entreprises, des équipes, des produits ...), et le processus créatif sous-jacent.</h2>
         </div>
       </Container>
     </section>
