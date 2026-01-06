@@ -1,7 +1,22 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 
 export const LIQUID_GLASS_FILTER_ID = 'liquid-glass-filter'
+
+// Detect Safari browser (doesn't properly support SVG filters in backdrop-filter)
+function useIsSafari() {
+    const [isSafari, setIsSafari] = useState(false)
+    
+    useEffect(() => {
+        const ua = navigator.userAgent.toLowerCase()
+        const isSafariBrowser = ua.includes('safari') && !ua.includes('chrome') && !ua.includes('chromium')
+        setIsSafari(isSafariBrowser)
+    }, [])
+    
+    return isSafari
+}
 
 type LiquidGlassDefsProps = {
     filterId?: string
@@ -82,10 +97,11 @@ export function LiquidGlass<E extends React.ElementType = 'div'> ({
                                                                       ...rest
                                                                   }: LiquidGlassProps<E>) {
     const Component = (as || 'div') as React.ElementType
+    const isSafari = useIsSafari()
 
     return (
       <Component
-        className={clsx('liquid-glass', className)}
+        className={clsx('liquid-glass', isSafari && 'liquid-glass-safari', className)}
         style={{
             ...style,
             ['--glass-blur' as const]: `${blur}px`,

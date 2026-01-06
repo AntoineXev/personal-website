@@ -169,7 +169,7 @@ export function Header () {
               </div>
           </header>
           <div className="md:hidden fixed bottom-4 left-0 right-0 flex items-center justify-center  z-50">
-              <Button className="text-base font-medium" href="https://calendar.app.google/BGyUfPHTsESBuo51A" target="_blank" hasArrow>Discutons ensemble</Button>
+              <Button className="text-xl py-4 px-4 z-0" href="https://calendar.app.google/BGyUfPHTsESBuo51A" target="_blank" hasArrow>Discutons ensemble</Button>
           </div>
       </>
     )
