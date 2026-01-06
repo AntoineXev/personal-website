@@ -9,11 +9,11 @@ export default {
   plugins: [typographyPlugin],
   theme: {
     fontSize: {
-      xs: ['1rem', { lineHeight: '1.5rem' }],
-      sm: ['1.25rem', { lineHeight: '1.5rem' }],
-      base: ['1.5rem', { lineHeight: '2rem' }],
-      lg: ['1.875rem', { lineHeight: '2rem' }],
-      xl: ['1.875rem', { lineHeight: '2.25rem' }],
+      xs: ['0.8rem', { lineHeight: '1rem' }],
+      sm: ['0.9rem', { lineHeight: '1rem' }],
+      base: ['1rem', { lineHeight: '1.4rem' }],
+      lg: ['1.25rem', { lineHeight: '1.5rem' }],
+      xl: ['1.50rem', { lineHeight: '1.8rem' }],
       '2xl': ['2rem', { lineHeight: '2.25rem' }],
       '3xl': ['3rem', { lineHeight: '3.25rem' }],
       '4xl': ['3.75rem', { lineHeight: '4rem' }],
@@ -21,11 +21,10 @@ export default {
       '6xl': ['5.25rem', { lineHeight: '6.25rem' }],
       '7xl': ['8rem', { lineHeight: '8.25rem' }],
       '8xl': ['6rem', { lineHeight: '1' }],
-      '9xl': ['8rem', { lineHeight: '1' }],
+      '9xl': ['10rem', { lineHeight: '1' }],
     },
     fontFamily: {
       'sans': [
-          'DM Sans',
         '"Inter"',
         'system-ui',
         '-apple-system',
@@ -40,6 +39,12 @@ export default {
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
         '"Noto Color Emoji"',
+      ],
+      'serif': [
+        'Georgia',
+        'Times New Roman',
+        'Times',
+        'serif',
       ],
     },
     typography: typographyStyles,

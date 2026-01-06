@@ -3,7 +3,6 @@ import { type Metadata } from 'next'
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 import { DM_Sans } from 'next/font/google'
-import avatarImage from '@/images/avatar.jpg'
 
 import '@/styles/tailwind.css'
 import clsx from "clsx";
@@ -42,11 +41,9 @@ export default function RootLayout ({
     return (
         <html lang="fr" className={clsx(dmSans.className, "h-full antialiased scroll-smooth overflow-x-hidden")}
               suppressHydrationWarning>
-        <body className="flex h-full bg-zinc-50 dark:bg-black">
+        <body className=" bg-white dark:bg-black overflow-hidden">
         <Providers>
-            <div className="flex w-full">
                 <Layout>{children}</Layout>
-            </div>
         </Providers>
         </body>
         </html>

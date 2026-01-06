@@ -1,14 +1,14 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import { LiquidGlassDefs } from '@/components/LiquidGlass'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className="relative flex w-full flex-col">
+        <LiquidGlassDefs scale={70} seed={24} stdDeviation={12}/>
         <Header />
-        <main className="flex-auto">{children}</main>
+        <main className="flex-auto mt-24">{children}</main>
         <Footer />
-      </div>
     </>
   )
 }

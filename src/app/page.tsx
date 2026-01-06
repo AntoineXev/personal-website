@@ -12,13 +12,16 @@ import logoMLC from '@/images/logos/mlc.svg'
 import logoXev from '@/images/logos/xev.svg'
 import logoBloom from '@/images/logos/bloom.svg'
 import logoWeblaunch from '@/images/logos/weblaunch.svg'
-import mlcAppImage from '@/images/mlc-apps.png'
-import wodappImage from '@/images/wodapp.png'
+import HeroImage from '@/images/hero-image.png'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
-import { ProjectExcerpt } from "@/components/ProjectExcerpt";
 import { BreadcrumbList, Graph, Person } from "schema-dts";
 import { Schema } from "@/components/Schema";
+import {HeroSection} from "@/components/HeroSection";
+import {AboutMeSection} from "@/components/AboutMeSection";
+import {FeaturesSection} from "@/components/FeaturesSection";
+import {SkillsSection} from "@/components/SkillsSection";
+import {ProjectsSection} from "@/components/ProjectsSection";
 
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -39,19 +42,6 @@ function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
       <path
         d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
         className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </svg>
   )
@@ -106,11 +96,10 @@ function Newsletter() {
           placeholder="Email address"
           aria-label="Email address"
           required
-          className="min-w-0 w-full flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-red-500 focus:outline-none focus:ring-4 focus:ring-red-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-red-400 dark:focus:ring-red-400/10 sm:text-sm"
+          className="min-w-0 w-full flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-4 focus:ring-zinc-900/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-zinc-200 dark:focus:ring-zinc-100/10 sm:text-sm"
         />
-        <Button variant="secondary" type="submit" className="">
+        <Button type="submit" hasArrow className="">
           Discutons ensemble
-          <ArrowDownIcon className="h-4 w-4 stroke-white transition group-active:stroke-gray-100 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50 -rotate-90" />
         </Button>
       </div>
     </form>
@@ -302,49 +291,11 @@ export default async function Home() {
   return (
     <>
       <Schema things={[person]} slug={''}/>
-      <Container className="mt-9 snap-center">
-        <div className="max-w-5xl">
-          <h1 className="text-6xl tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-7xl">
-            Dev fullstack, fondateur et designer amateur.
-          </h1>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://github.com/AntoineXev"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://www.linkedin.com/in/ahervet/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
-          </div>
-        </div>
-      </Container>
-      <Container>
-        <ProjectExcerpt title={'Xev. _ Une agence web sur mesure pour tous vos logiciels métier'} subtitle={'Du simple audit au développement et à la mise en place d\'ERP sur mesure, en passant par la connexion d\'outils, nous sommes capables de réaliser tout type d\'application métier.'} image={logoXev} imageAlt={'Logo de l\'entrprise Xev.'} buttonText={'Voir le projet'} href={'https://xev.agency'} />
-      </Container>
-      <Container>
-        <ProjectExcerpt align={'right'} title={'Mon Livret C _ Gestionnaire de fonds en crypto-actifs'} subtitle={'Mon rôle est de concevoir, développer, et faire évoluer les outils et l\'environnemnt technique de ce gestionnaire de fond particulier.'} image={mlcAppImage} imageAlt={'Application web et mobile de gestion MLC'} buttonText={'En savoir plus'} href={'https://monlivretc.com'} />
-      </Container>
-      <Container>
-        <ProjectExcerpt align={'center'} title={'Wodapp _ Outil de réservation de séance de sport.'} subtitle={'Wodapp est une suite complète d\'outils - Application mobile client & Application Web de Gestion - pour gérer les réservations de ses cours de sports, en particulier pour les salles de crossfit.'} imageAlt={'Application web et mobile de wodapp'} image={wodappImage} buttonText={'En savoir plus'} href={'https://wodapp.fr'} />
-      </Container>
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-                <Article key={article.slug} article={article} />
-            ))}
-          </div>
-        </div>
-      </Container>
-      <Container>
-        <div className="min-h-screen flex flex-col items-center lg:flex-row gap-10 md:gap-32 my-auto">
-          <Newsletter />
-          <Resume />
-        </div>
-      </Container>
+      <HeroSection />
+      <AboutMeSection />
+      <SkillsSection />
+      <ProjectsSection />
+    
     </>
   )
 }
