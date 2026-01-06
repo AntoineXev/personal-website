@@ -6,33 +6,33 @@ import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
+import image1 from '@/images/photos/groles.jpeg'
+import image2 from '@/images/photos/image-4.jpg'
+import image3 from '@/images/photos/mer.jpeg'
+import image4 from '@/images/photos/cafe.jpeg'
 import { LiquidGlass } from './LiquidGlass'
 
 const gallery = [
   {
-    title: 'Lyon',
-    subtitle: 'Lyon est ma maison',
+    title: 'Groles',
+    subtitle: 'J\'adore les groles',
     image: image1,
   },
   {
+    title: 'Café',
+    subtitle: 'Je carbure au café',
+    image: image4,
+  },
+  {
     title: 'Code',
-    subtitle: 'Le code est mon carburant',
+    subtitle: 'Le code ca me détends',
     image: image2,
   },
   {
     title: 'Nature',
-    subtitle: "L'esprit s'éclaircit dans la nature",
+    subtitle: "J'aime bien les balades",
     image: image3,
-  },
-  {
-    title: 'Remote',
-    subtitle: 'À distance, mais toujours proche',
-    image: image4,
-  },
+  }
 ]
 
 const stats = [

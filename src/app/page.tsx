@@ -293,7 +293,6 @@ export default async function Home() {
       <Schema things={[person]} slug={''}/>
       <HeroSection />
       <AboutMeSection />
-      {/* <FeaturesSection /> */}
       <SkillsSection />
       <ProjectsSection />
     

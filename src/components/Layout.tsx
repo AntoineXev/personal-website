@@ -7,7 +7,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <>
         <LiquidGlassDefs scale={70} seed={24} stdDeviation={12}/>
         <Header />
-        <main className="flex-auto">{children}</main>
+        <main className="flex-auto mt-24">{children}</main>
         <Footer />
     </>
   )

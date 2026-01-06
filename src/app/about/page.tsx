@@ -74,44 +74,25 @@ export default function About () {
                         </div>
                     </div>
                     <div className="lg:order-first lg:row-span-2">
-                        <h1 className="text-6xl tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl mb-16">
+                        <h1 className="text-3xl md:text-5xl tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl mb-16">
                             Concevoir des solutions qui améliorent la vie des autres.
                         </h1>
                         <div className="mt-6 space-y-7 text-base text-zinc-800 dark:text-zinc-200">
-                            <p>
-                                Je m'appele Antoine, et depuis mon plus jeune âge, je bricole divers projets. À l'âge de 13
-                                ans, je réparais des écrans d'iPhone, une tâche assez complexe à l'époque, et je bidouillais
-                                les dernières consoles de jeu du marché. À 15 ans, j'ai transformé un vieil ordinateur
-                                familial en machine Mac (un hackintosh pour les initiés), utilisant alors OS X Tiger. Cette
-                                expérience m'a permis d'apprendre à manipuler les chargeurs de démarrage, les outils en
-                                ligne de commande et les fichiers kext. Un projet sympa !
-                            </p>
-                            <p>
-                                À cette époque, ma passion pour l'informatique n'était surpassée que par mon amour pour les
-                                baskets. Lorsque je ne passais pas mon temps libre sur un ordinateur, je faisais la queue
-                                devant les magasins pour acheter les dernières sneakers à la mode et les revendre le
-                                lendemain pour le triple de leur prix. Drôle, n'est-ce pas ?
-                            </p>
-                            <p>
-                                Cependant, j'ai tout arrêté entre 18 et 20 ans pour suivre un classe préparatoire, un pilier
-                                du système éducatif français, où j'ai étudié intensément les mathématiques et la physique
-                                (de 7h à 1h du matin). Ces deux années ont été les plus formatrices de ma vie. Par la suite,
-                                j'ai intégré l'école d'ingénieurs IMT Atlantique, anciennement Télécom Bretagne. Après mes
-                                études, j'ai tenté l'aventure entrepreneuriale en essayant de créer une marketplace dans le
-                                secteur des sneakers, qui malheureusement n'a pas abouti mais m'a beaucoup appris. Par la
-                                suite, je me suis installé à Berlin pour approfondir mes connaissances en développement web
-                                appliqué aux défis corporatifs.
-                            </p>
-                            <p>
-                                Aujourd'hui, je suis le fondateur de Xev., une agence de conseil et de développement de
-                                nouvelle génération. Nous travaillons à améliorer la vie des travailleurs en construisant
-                                des logiciels entièrement personnalisés pour répondre aux défis spécifiques des entreprises,
-                                en les aidant à tirer pleinement parti du web et des applications basées sur le cloud.
-                                Récemment, j'ai pris le poste de directeur général et CTO chez Mon livret C, un gestionnaire
-                                d'actifs français, où nous nous efforçons de développer et de commercialiser des produits
-                                financiers robustes basés sur les cryptomonnaies destinés aux banques et à l'ensemble du
-                                système financier traditionnel.
-                            </p>
+                        <p>
+Je m’appelle Antoine. Depuis toujours, j’aime comprendre comment les choses tiennent debout — et ce qu’il se passe quand on les démonte. Très tôt, j’ai bricolé des ordinateurs, des consoles, des projets imparfaits, souvent juste pour voir jusqu’où je pouvais aller.
+</p>
+
+<p>
+Avec le temps, j’ai appris la rigueur (en classe préparatoire), la construction méthodique (en école d’ingénieurs), puis l’expérimentation réelle : entreprendre, me tromper, recommencer. Berlin a été un terrain d’exploration, où j’ai confronté la tech à des problématiques d’entreprises très concrètes.
+</p>
+
+<p>
+Aujourd’hui, je dirige Xev., une agence qui conçoit des logiciels sur mesure, et j'occupe une place de CTO chez Mon Livret C sur des produits financiers basés sur les cryptomonnaies.
+</p>
+
+<p>
+Au fond, mon fil conducteur est simple : construire. Des produits, des équipes, des systèmes. Et continuer à apprendre en le faisant.
+</p>
                         </div>
                     </div>
                     <div className="lg:pl-20">

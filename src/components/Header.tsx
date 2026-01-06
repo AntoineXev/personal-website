@@ -160,7 +160,7 @@ export function Header () {
                                       <NavItem href="/uses"><SetupIcon
                                         className="h-10 w-10 text-white stroke-white"/></NavItem>
                                       <div className="border-r-2 dark:border-white/20 my-2 hidden md:block"></div>
-                                      <Button hasArrow className="hidden md:flex text-lg">Discutons</Button>
+                                      <Button hasArrow href="https://calendar.app.google/BGyUfPHTsESBuo51A" target="_blank" className="hidden md:flex text-lg">Discutons</Button>
                                   </LiquidGlass>
                               </nav>
                           </div>
@@ -169,7 +169,7 @@ export function Header () {
               </div>
           </header>
           <div className="md:hidden fixed bottom-4 left-0 right-0 flex items-center justify-center  z-50">
-              <Button className="text-base font-medium" hasArrow>Discutons ensemble</Button>
+              <Button className="text-base font-medium" href="https://calendar.app.google/BGyUfPHTsESBuo51A" target="_blank" hasArrow>Discutons ensemble</Button>
           </div>
       </>
     )

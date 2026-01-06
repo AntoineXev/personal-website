@@ -34,11 +34,11 @@ export function HeroSection() {
 	},  { dependencies: [isMobile], revertOnUpdate: true});
 	return (
 		<>
-			<Container className="px-0 pt-36 h-[100vh] overflow-hidden snap-center" >
-				<div className="max-w-4xl mx-auto flex flex-col items-center">
+			<Container className="px-0 -mt-24 h-[100vh] overflow-hidden snap-center" >
+				<div className="max-w-4xl  pt-48 mx-auto flex flex-col items-center">
 					<h1
 						className="font-medium text-3xl leading-normal text-center tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-						Entrepreneur, Builder, <br/>& Digital Enthousiast
+						Entrepreneur, Créatif, <br/>& Digital Enthousiast
 					</h1>
 					<div className="flex gap-6 w-[600px] mt-96 md:w-[800px] z-0" ref={imageRef}>
 						<Image src={HeroImage} alt="iphone" />
