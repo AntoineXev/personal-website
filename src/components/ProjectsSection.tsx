@@ -146,7 +146,7 @@ function ProjectPanel({ project, index }: { project: Project; index: number }) {
           <p className="text-zinc-500 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
             {project.subtitle}
           </p>
-          <Button href={project.href} target="_blank" hasArrow className="scale-90">
+          <Button href={project.href} target="_blank" variant="secondary" hasArrow>
             En savoir plus
           </Button>
         </div>

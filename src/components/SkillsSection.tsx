@@ -91,7 +91,7 @@ export function SkillsSection () {
 			<div className="absolute overflow-hidden grid-rows-4 grid-cols-1 md:grid-cols-2 grid md:grid-rows-2 left-0 right-0 bottom-0 top-0 z-10">
 				<SkillCard ref={skillCardRef1} className="m-auto -translate-x-[200%]" label="Design Produit"/>
 				<SkillCard ref={skillCardRef2} className="m-auto translate-x-[200%]"  label="Pilotage de projets"/>
-				<SkillCard ref={skillCardRef3} className="m-auto -translate-x-[200%]" label="Data manipulation"/>
+				<SkillCard ref={skillCardRef3} className="m-auto -translate-x-[200%]" label="Développement "/>
 				<SkillCard ref={skillCardRef4} className="m-auto translate-x-[200%]" label="Direction produit"/>
 			</div>
 		</section>
