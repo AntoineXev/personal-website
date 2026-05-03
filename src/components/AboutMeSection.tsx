@@ -1,159 +1,179 @@
-"use client"
+'use client'
 
-import Image from 'next/image'
-import { Container } from '@/components/Container'
-import { useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
+import Image, { type StaticImageData } from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from 'motion/react'
 import image1 from '@/images/photos/groles.jpeg'
 import image2 from '@/images/photos/image-4.jpg'
 import image3 from '@/images/photos/mer.jpeg'
 import image4 from '@/images/photos/cafe.jpeg'
-import { LiquidGlass } from './LiquidGlass'
+import { liquidGlassFilterCss, useSupportsLiquidGlass } from './LiquidGlass'
 
-const gallery = [
-  {
-    title: 'Groles',
-    subtitle: 'J\'adore les groles',
-    image: image1,
-  },
-  {
-    title: 'Café',
-    subtitle: 'Je carbure au café',
-    image: image4,
-  },
-  {
-    title: 'Code',
-    subtitle: 'Le code ca me détends',
-    image: image2,
-  },
-  {
-    title: 'Nature',
-    subtitle: "J'aime bien les balades",
-    image: image3,
-  }
+type GalleryItem = {
+  title: string
+  subtitle: string
+  image: StaticImageData
+}
+
+type CardConfig = {
+  xPctDesktop: number
+  xPctMobile: number
+  scale: number
+  rotateStart: number
+  rotateEnd: number
+  startPct: number
+  travelPct: number
+}
+
+const gallery: GalleryItem[] = [
+  { title: 'Groles', subtitle: "J'adore les groles", image: image1 },
+  { title: 'Café', subtitle: 'Je carbure au café', image: image4 },
+  { title: 'Code', subtitle: 'Le code ca me détends', image: image2 },
+  { title: 'Nature', subtitle: "J'aime bien les balades", image: image3 },
 ]
 
-const stats = [
-  { label: 'Projets complétés', value: '10+' },
-  { label: "Années d'expérience", value: '8+' },
-  { label: 'Confiance des fondateurs', value: 'Trusted' },
+// Per-card config — deterministic so positions stay stable across reloads / SSR.
+// xPct       : horizontal anchor (% of stage width), distinct desktop/mobile
+// scale      : depth-effect size variation
+// rotate*    : rotation in degrees at start / end of fall
+// startPct   : when (in section progress 0..1) the card begins falling
+// travelPct  : how long the fall takes (smaller = faster card)
+const cardConfigs: CardConfig[] = [
+  { xPctDesktop: 14, xPctMobile: 4, scale: 0.95, rotateStart: -7, rotateEnd: 5, startPct: 0.00, travelPct: 0.55 },
+  { xPctDesktop: 36, xPctMobile: 53, scale: 1.00, rotateStart: 4, rotateEnd: -3, startPct: 0.30, travelPct: 0.55 },
+  { xPctDesktop: 58, xPctMobile: 4, scale: 0.88, rotateStart: -3, rotateEnd: 6, startPct: 0.15, travelPct: 0.55 },
+  { xPctDesktop: 74, xPctMobile: 53, scale: 0.78, rotateStart: 6, rotateEnd: -4, startPct: 0.45, travelPct: 0.55 },
 ]
 
-export function AboutMeSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const pinTextRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(true)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+  return isDesktop
+}
 
-  const cards = [
-    {
-      ...gallery[0],
-      className: 'pt-10 ',
-    },
-    {
-      ...gallery[1],
-      className: 'col-start-7 md:col-start-9 row-start-2 pt-10 md:pt-20',
-    },
-    {
-      ...gallery[2],
-      className: 'col-start-3 md:col-start-3 row-start-3 pt-10 md:pt-20',
-    },
-    {
-      ...gallery[3],
-      className: 'col-start-5 md:col-start-6 row-start-4 pt-10 md:pt-20',
-    },
-  ]
+function FallingCard({
+  item,
+  cfg,
+  isDesktop,
+  scrollYProgress,
+  supportsLiquid,
+}: {
+  item: GalleryItem
+  cfg: CardConfig
+  isDesktop: boolean
+  scrollYProgress: MotionValue<number>
+  supportsLiquid: boolean
+}) {
+  const xPct = isDesktop ? cfg.xPctDesktop : cfg.xPctMobile
+  const start = cfg.startPct
+  const end = Math.min(1, cfg.startPct + cfg.travelPct)
+  const fadeIn = start + (end - start) * 0.08
+  const fadeOut = end - (end - start) * 0.08
 
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger)
-
-      const timeline = gsap.timeline({
-        id: 'aboutme-waterfall',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: pinTextRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      })
-
-      cardsRef.current.forEach((card, idx) => {
-        if (!card) return
-
-        const fromY = () => 0
-        const toY = () => 0
-
-        timeline.fromTo(
-          card,
-          { y: fromY, opacity: 1 },
-          { y: toY, opacity: 1, ease: 'none' },
-          0.025
-        )
-      })
-    },
-    { scope: sectionRef }
+  const y = useTransform(scrollYProgress, [start, end], ['-130vh', '130vh'])
+  const rotate = useTransform(
+    scrollYProgress,
+    [start, end],
+    [cfg.rotateStart, cfg.rotateEnd],
+  )
+  const opacity = useTransform(
+    scrollYProgress,
+    [start, fadeIn, fadeOut, end],
+    [0, 1, 1, 0],
   )
 
+  // On Chromium, override the Tailwind backdrop-filter with the SVG liquid-glass
+  // filter chained after blur+saturate so we keep the frosted base AND get refraction.
+  const liquidStyle = supportsLiquid
+    ? {
+      backdropFilter: `${liquidGlassFilterCss} blur(24px) saturate(150%)`,
+      WebkitBackdropFilter: `${liquidGlassFilterCss} blur(24px) saturate(150%)`,
+    }
+    : undefined
+
   return (
-    <div       ref={sectionRef}>
-      			<div className="relative w-full h-16 z-10   border-t   border-gray-200 dark:border-gray-800" style={{boxShadow:  '0px -15px 15px rgba(0, 0, 0, 0.2)'}}></div>
-            <section
+    <div
+      className="pointer-events-none absolute inset-y-0 flex items-center w-44 md:w-72"
+      style={{ left: `${xPct}%` }}
+    >
+      <motion.div
+        style={{ y, rotate, opacity, scale: cfg.scale, ...liquidStyle }}
+        className="flex w-full flex-col rounded-2xl bg-white/10 p-1 shadow-xl shadow-black/30 will-change-transform dark:bg-white/5"
+      >
+        <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover"
+            sizes="(min-width: 1024px) 18rem, 11rem"
+          />
+        </div>
+        <div className="px-2 pt-2 pb-1 text-left">
+          <p className="text-[11px] text-zinc-600 dark:text-zinc-400">
+            {item.subtitle}
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+export function AboutMeSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const isDesktop = useIsDesktop()
+  const supportsLiquid = useSupportsLiquidGlass()
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
+
+  return (
+    <section
+      ref={sectionRef}
       id="aboutme-section"
       className="relative h-[500vh]"
     >
+      {/* Single sticky stage: pins both the cards AND the text together for the section's scroll length */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Pinned text (behind the falling cards) */}
+        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4">
+          <div className="pointer-events-auto mx-auto flex max-w-4xl flex-col items-center gap-16 text-center">
+            <div className="inline-flex items-center gap-3 rounded-lg border border-zinc-200 bg-white/80 px-4 py-2 text-sm text-zinc-600 shadow-sm backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-900/70 dark:text-zinc-300">
+              Bonjour, moi c&apos;est Antoine
+            </div>
+            <h2 style={{ fontFamily: 'var(--font-handwritten)' }} className="text-3xl leading-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+              Intéressé par l'art de construire des trucs (des objets, des applications, des équipes, des entreprises...) et le processus créatif inhérent et sous-jacent.
 
-      {/* Layer des cartes qui tombent au-dessus du texte */}
-      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-        <div className="relative w-full px-6 md:px-28">
-          <div className="relative grid grid-flow-col grid-rows-4 w-full grid-cols-12 gap-3">
-            {cards.map((item, idx) => (
-              <div
-                key={item.title}
-                ref={(el) => (cardsRef.current[idx] = el)}
-                className={`pointer-events-none col-span-6 md:col-span-3 ${item.className} will-change-transform`}
-              >
-                <LiquidGlass as="div"
-                  blur={1}
-                  style={{ '--glass-padding': '1rem',  '--glass-bg': 'rgba(255, 255, 255, 0)' } as React.CSSProperties}
-                className="flex flex-col rounded-2xl  p-1 shadow-xl shadow-zinc-900/5">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 1024px) 13rem, 10rem"
-                    />
-                  </div>
-                  <div className="px-2 pt-1 pb-1 text-left">
-                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{item.subtitle}</p>
-                  </div>
-                </LiquidGlass>
-              </div>
-            ))}
+            </h2>
           </div>
+        </div>
+
+        {/* Cards layer (in front of the text) */}
+        <div className="absolute inset-0 z-20">
+          {cardConfigs.map((cfg, idx) => (
+            <FallingCard
+              key={gallery[idx].title}
+              item={gallery[idx]}
+              cfg={cfg}
+              isDesktop={isDesktop}
+              supportsLiquid={supportsLiquid}
+              scrollYProgress={scrollYProgress}
+            />
+          ))}
         </div>
       </div>
-
-      <Container id="aboutme-container" className="relative h-full">
-        <div
-        ref={pinTextRef}
-          className="sticky top-6 z-10 mx-auto flex min-h-[75vh] max-w-4xl flex-col items-center justify-center gap-6 text-center rounded-3xl bg-white/95 p-8 backdrop-blur-sm dark:bg-zinc-950/90"
-        >
-          <div className="inline-flex items-center gap-3 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-600 shadow-sm backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-900/70 dark:text-zinc-300">
-            Bonjour, moi c&apos;est Antoine
-          </div>
-          <h2 className="text-2xl font-serif leading-relaxed italic font-medium leading-tight tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl">
-          Ce qui m'interesse, c'est la manière dont on construit des choses (des entreprises, des équipes, des produits ...), et le processus créatif sous-jacent.</h2>
-        </div>
-      </Container>
     </section>
-    </div>
-
   )
 }

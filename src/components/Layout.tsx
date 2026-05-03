@@ -1,9 +1,9 @@
-import { LiquidGlassDefs } from '@/components/LiquidGlass'
+import { LiquidGlassFilter } from '@/components/LiquidGlass'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <LiquidGlassDefs scale={70} seed={24} stdDeviation={12} />
+      <LiquidGlassFilter />
       <main className="flex-auto">{children}</main>
     </>
   )

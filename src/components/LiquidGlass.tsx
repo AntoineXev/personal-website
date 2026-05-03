@@ -1,121 +1,161 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 
-export const LIQUID_GLASS_FILTER_ID = 'liquid-glass-filter'
+type Surface = 'convex' | 'concave'
 
-// Detect Safari browser (doesn't properly support SVG filters in backdrop-filter)
-function useIsSafari() {
-    const [isSafari, setIsSafari] = useState(false)
-    
-    useEffect(() => {
-        const ua = navigator.userAgent.toLowerCase()
-        const isSafariBrowser = ua.includes('safari') && !ua.includes('chrome') && !ua.includes('chromium')
-        setIsSafari(isSafariBrowser)
-    }, [])
-    
-    return isSafari
+const FILTER_ID = 'liquid-glass-filter'
+
+function clamp(v: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, v))
 }
 
-type LiquidGlassDefsProps = {
-    filterId?: string
-    baseFrequency?: string
-    stdDeviation?: number
-    scale?: number
-    seed?: number
-    numOctaves?: number
+// Build a displacement map encoding refraction direction in R/G channels.
+// At each pixel: R = 128 + dx*127, G = 128 + dy*127, where (dx, dy) ∈ [-1, 1] is
+// the refraction vector. (128, 128) = no displacement (sample the same pixel).
+// We model an axis-aligned rounded-rectangle "lens" — refraction is non-zero only
+// near the edges, pointing inward (convex) or outward (concave), with a smooth
+// falloff toward the interior so the centre of the glass is undistorted.
+function generateDisplacementMap(
+  w: number,
+  h: number,
+  edgeRatio: number,
+  strength: number,
+  surface: Surface,
+): string {
+  const canvas = document.createElement('canvas')
+  canvas.width = w
+  canvas.height = h
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return ''
+
+  const img = ctx.createImageData(w, h)
+  const data = img.data
+
+  const edgePx = Math.min(w, h) * edgeRatio
+  const sign = surface === 'concave' ? -1 : 1
+
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4
+
+      const distLeft = x
+      const distRight = w - 1 - x
+      const distTop = y
+      const distBottom = h - 1 - y
+      const distEdgeX = Math.min(distLeft, distRight)
+      const distEdgeY = Math.min(distTop, distBottom)
+      const distEdge = Math.min(distEdgeX, distEdgeY)
+
+      // Inward normal of the nearest edge.
+      let nx = 0
+      let ny = 0
+      if (distEdgeX < distEdgeY) {
+        nx = distLeft < distRight ? 1 : -1
+      } else {
+        ny = distTop < distBottom ? 1 : -1
+      }
+
+      // Magnitude: max at the edge, smooth ease-out to zero at edgePx.
+      const t = clamp(distEdge / edgePx, 0, 1)
+      const mag = (1 - t) * (1 - t) * strength * sign
+
+      const dx = nx * mag
+      const dy = ny * mag
+
+      data[i + 0] = clamp(Math.round(128 + dx * 127), 0, 255)
+      data[i + 1] = clamp(Math.round(128 + dy * 127), 0, 255)
+      data[i + 2] = 128
+      data[i + 3] = 255
+    }
+  }
+
+  ctx.putImageData(img, 0, 0)
+  return canvas.toDataURL('image/png')
 }
 
-export function LiquidGlassDefs ({
-                                      filterId = LIQUID_GLASS_FILTER_ID,
-                                      baseFrequency = '0.20 0.10',
-                                      stdDeviation = 6,
-                                      scale = 70,
-                                      seed = 12,
-                                      numOctaves = 2,
-                                  }: LiquidGlassDefsProps) {
-    return (
-      <svg aria-hidden className="pointer-events-none absolute h-0 w-0 select-none">
-          <defs>
-              <filter
-                id={filterId}
-                x="-50%"
-                y="-50%"
-                width="200%"
-                height="200%"
-                filterUnits="objectBoundingBox"
-                colorInterpolationFilters="sRGB"
-              >
-                  <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency={baseFrequency}
-                    numOctaves={numOctaves}
-                    seed={seed}
-                    result="noise"
-                  />
-                  <feGaussianBlur in="noise" stdDeviation={stdDeviation} result="smoothedNoise"/>
-                  <feColorMatrix in="smoothedNoise" type="saturate" values="0" result="monoNoise"/>
-                  <feComponentTransfer in="monoNoise" result="heightMap">
-                      <feFuncR type="gamma" amplitude="1.05" exponent="0.9" offset="0"/>
-                      <feFuncG type="gamma" amplitude="1.05" exponent="0.9" offset="0"/>
-                      <feFuncB type="gamma" amplitude="1.05" exponent="0.9" offset="0"/>
-                  </feComponentTransfer>
-                  <feDisplacementMap
-                    in="SourceGraphic"
-                    in2="heightMap"
-                    scale={scale}
-                    xChannelSelector="R"
-                    yChannelSelector="G"
-                    result="displacement"
-                  />
-                  <feComposite in="displacement" in2="SourceGraphic" operator="atop"/>
-              </filter>
-          </defs>
-      </svg>
-    )
+type LiquidGlassFilterProps = {
+  /** SVG `<filter>` id — reference it via `backdrop-filter: url(#id)`. */
+  id?: string
+  /** Reference map width in pixels. Stretched to element bounds via preserveAspectRatio="none". */
+  width?: number
+  /** Reference map height in pixels. */
+  height?: number
+  /** Edge band depth as a fraction of min(width, height). Larger = softer refraction zone. */
+  edgeRatio?: number
+  /** Refraction magnitude in [0, 1]. Higher = stronger bend at the edge. */
+  strength?: number
+  /** Final scale fed to feDisplacementMap (pixel offset multiplier). */
+  scale?: number
+  /** Convex glass bends light inward (lens-like); concave bends it outward. */
+  surface?: Surface
 }
 
-type LiquidGlassProps<E extends React.ElementType = 'div'> = {
-    as?: E
-    blur?: number
-    bgLight?: string
-    bgDark?: string
-    className?: string
-    style?: React.CSSProperties
-    children?: React.ReactNode
-} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'style' | 'className' | 'children'>
+/**
+ * Renders the SVG filter that powers the liquid-glass refraction. Mount once
+ * (e.g. in the root layout) — every glass element on the page references the
+ * same filter via `backdrop-filter: url(#liquid-glass-filter)`.
+ *
+ * Browser support: only Chromium currently honours SVG filters in
+ * backdrop-filter. Safari / Firefox silently ignore the URL ref and fall back
+ * to whatever native `backdrop-filter` rules the element has (blur, saturate…).
+ */
+export function LiquidGlassFilter({
+  id = FILTER_ID,
+  width = 280,
+  height = 360,
+  edgeRatio = 0.18,
+  strength = 0.85,
+  scale = 80,
+  surface = 'convex',
+}: LiquidGlassFilterProps) {
+  const [mapUrl, setMapUrl] = useState('')
 
-export function LiquidGlass<E extends React.ElementType = 'div'> ({
-                                                                      as,
-                                                                      blur = 1,
-                                                                      bgLight,
-                                                                      bgDark,
-                                                                      className,
-                                                                      style,
-                                                                      children,
-                                                                      ...rest
-                                                                  }: LiquidGlassProps<E>) {
-    const Component = (as || 'div') as React.ElementType
-    const isSafari = useIsSafari()
+  useEffect(() => {
+    setMapUrl(generateDisplacementMap(width, height, edgeRatio, strength, surface))
+  }, [width, height, edgeRatio, strength, surface])
 
-    return (
-      <Component
-        className={clsx('liquid-glass', isSafari && 'liquid-glass-safari', className)}
-        style={{
-            ...style,
-            ['--glass-blur' as const]: `${blur}px`,
-            ...(bgLight ? { ['--glass-bg-light' as const]: bgLight } : null),
-            ...(bgDark
-                ? { ['--glass-bg-dark' as const]: bgDark }
-                : bgLight
-                    ? { ['--glass-bg-dark' as const]: `color-mix(in srgb, black 85%, ${bgLight} 15%)` }
-                    : null),
-        } as React.CSSProperties}
-        {...rest}
-      >
-          {children}
-      </Component>
-    )
+  return (
+    <svg
+      aria-hidden
+      width="0"
+      height="0"
+      style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
+    >
+      <defs>
+        <filter id={id} x="0%" y="0%" width="100%" height="100%">
+          {mapUrl && (
+            <feImage
+              href={mapUrl}
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              result="displacementMap"
+              preserveAspectRatio="none"
+            />
+          )}
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="displacementMap"
+            scale={scale}
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </defs>
+    </svg>
+  )
 }
 
+/** CSS value to reference the filter from any element's `backdrop-filter`. */
+export const liquidGlassFilterCss = `url(#${FILTER_ID})`
+
+/** Detect Chromium-based browsers — only ones that actually render SVG filters in backdrop-filter. */
+export function useSupportsLiquidGlass() {
+  const [supported, setSupported] = useState(false)
+  useEffect(() => {
+    setSupported('chrome' in window)
+  }, [])
+  return supported
+}

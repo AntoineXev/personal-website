@@ -2,12 +2,13 @@ import { type Metadata } from 'next'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
-import { DM_Sans } from 'next/font/google'
+import { Courier_Prime, Ballet } from 'next/font/google'
 
 import '@/styles/tailwind.css'
 import clsx from "clsx";
 
-const dmSans = DM_Sans({subsets: ['latin']})
+const typewriter = Courier_Prime({subsets: ['latin'], weight: ['400', '700']})
+const handwritten = Ballet({subsets: ['latin'], variable: '--font-handwritten'})
 
 export const metadata: Metadata = {
     title: {
@@ -39,9 +40,9 @@ export default function RootLayout ({
     children: React.ReactNode
 }) {
     return (
-        <html lang="fr" className={clsx(dmSans.className, "h-full antialiased scroll-smooth overflow-x-hidden")}
+        <html lang="fr" className={clsx(typewriter.className, handwritten.variable, "antialiased scroll-smooth")}
               suppressHydrationWarning>
-        <body className=" bg-white dark:bg-black overflow-hidden">
+        <body className="bg-white dark:bg-black">
         <Providers>
                 <Layout>{children}</Layout>
         </Providers>
