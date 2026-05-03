@@ -13,9 +13,11 @@ function clamp(v: number, min: number, max: number) {
 // Build a displacement map encoding refraction direction in R/G channels.
 // At each pixel: R = 128 + dx*127, G = 128 + dy*127, where (dx, dy) ∈ [-1, 1] is
 // the refraction vector. (128, 128) = no displacement (sample the same pixel).
-// We model an axis-aligned rounded-rectangle "lens" — refraction is non-zero only
-// near the edges, pointing inward (convex) or outward (concave), with a smooth
-// falloff toward the interior so the centre of the glass is undistorted.
+//
+// Each pixel sums the influence of all four edges independently — pixels near
+// corners pick up both an X and a Y component (proper diagonal refraction)
+// while the centre stays at 0,0. A convex lens magnifies, so left-edge pixels
+// sample from the right (positive X) and so on.
 function generateDisplacementMap(
   w: number,
   h: number,
@@ -35,33 +37,24 @@ function generateDisplacementMap(
   const edgePx = Math.min(w, h) * edgeRatio
   const sign = surface === 'concave' ? -1 : 1
 
+  // Smooth ease-out from an edge: 1 right at the edge (d=0), 0 once we're
+  // edgePx inside. Quadratic so the falloff feels natural rather than linear.
+  const edgeFade = (d: number) => {
+    const t = clamp(d / edgePx, 0, 1)
+    return (1 - t) * (1 - t)
+  }
+
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4
 
-      const distLeft = x
-      const distRight = w - 1 - x
-      const distTop = y
-      const distBottom = h - 1 - y
-      const distEdgeX = Math.min(distLeft, distRight)
-      const distEdgeY = Math.min(distTop, distBottom)
-      const distEdge = Math.min(distEdgeX, distEdgeY)
+      // Net X contribution: positive if closer to the left edge, negative if
+      // closer to the right. At the centre both fades are ≈ 0 → no displacement.
+      const xRefr = edgeFade(x) - edgeFade(w - 1 - x)
+      const yRefr = edgeFade(y) - edgeFade(h - 1 - y)
 
-      // Inward normal of the nearest edge.
-      let nx = 0
-      let ny = 0
-      if (distEdgeX < distEdgeY) {
-        nx = distLeft < distRight ? 1 : -1
-      } else {
-        ny = distTop < distBottom ? 1 : -1
-      }
-
-      // Magnitude: max at the edge, smooth ease-out to zero at edgePx.
-      const t = clamp(distEdge / edgePx, 0, 1)
-      const mag = (1 - t) * (1 - t) * strength * sign
-
-      const dx = nx * mag
-      const dy = ny * mag
+      const dx = xRefr * strength * sign
+      const dy = yRefr * strength * sign
 
       data[i + 0] = clamp(Math.round(128 + dx * 127), 0, 255)
       data[i + 1] = clamp(Math.round(128 + dy * 127), 0, 255)
@@ -104,9 +97,9 @@ export function LiquidGlassFilter({
   id = FILTER_ID,
   width = 280,
   height = 360,
-  edgeRatio = 0.18,
-  strength = 0.85,
-  scale = 80,
+  edgeRatio = 0.09,
+  strength = 0.75,
+  scale = 60,
   surface = 'convex',
 }: LiquidGlassFilterProps) {
   const [mapUrl, setMapUrl] = useState('')

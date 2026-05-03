@@ -93,13 +93,19 @@ function FallingCard({
     [0, 1, 1, 0],
   )
 
-  // On Chromium, override the Tailwind backdrop-filter with the SVG liquid-glass
-  // filter chained after blur+saturate so we keep the frosted base AND get refraction.
+  // Apple-style liquid glass on Chromium:
+  //   1. soft blur of the backdrop FIRST so harsh edges don't get distorted
+  //   2. SVG displacement bends the softened content at the rim
+  //   3. light saturate to keep colours lively
+  // Inset highlights and a soft drop shadow give the "lit from above" specular
+  // that Apple's material has.
   const liquidStyle = supportsLiquid
     ? {
-      backdropFilter: `${liquidGlassFilterCss} blur(24px) saturate(150%)`,
-      WebkitBackdropFilter: `${liquidGlassFilterCss} blur(24px) saturate(150%)`,
-    }
+        backdropFilter: `blur(2px) ${liquidGlassFilterCss} saturate(120%)`,
+        WebkitBackdropFilter: `blur(2px) ${liquidGlassFilterCss} saturate(120%)`,
+        boxShadow:
+          'inset 0 1.5px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.18), 0 18px 36px -8px rgba(0, 0, 0, 0.45)',
+      }
     : undefined
 
   return (
@@ -109,7 +115,7 @@ function FallingCard({
     >
       <motion.div
         style={{ y, rotate, opacity, scale: cfg.scale, ...liquidStyle }}
-        className="flex w-full flex-col rounded-2xl bg-white/10 p-1 shadow-xl shadow-black/30 will-change-transform dark:bg-white/5"
+        className="flex w-full flex-col overflow-hidden rounded-2xl bg-white/10 p-1 shadow-xl shadow-black/20 will-change-transform dark:bg-white/5"
       >
         <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
           <Image
