@@ -1,15 +1,8 @@
-import rehypePrism from '@mapbox/rehype-prism'
-import nextMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-  compiler: {
-    styledComponents: true,
-  },
-  experimental: { optimizeCss: true },
-  swcMinify: false,
+  images: { unoptimized: true },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -17,14 +10,19 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  async redirects() {
+    return [
+      { source: '/about', destination: '/', statusCode: 301 },
+      { source: '/articles', destination: '/', statusCode: 301 },
+      { source: '/articles/:path*', destination: '/', statusCode: 301 },
+      { source: '/projects', destination: '/', statusCode: 301 },
+      { source: '/projects/:path*', destination: '/', statusCode: 301 },
+      { source: '/uses', destination: '/', statusCode: 301 },
+      { source: '/thank-you', destination: '/', statusCode: 301 },
+    ]
+  },
 }
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
-  }
-})
+initOpenNextCloudflareForDev()
 
-export default withMDX(nextConfig)
+export default nextConfig
