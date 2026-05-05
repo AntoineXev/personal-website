@@ -1,37 +1,42 @@
-import { build, context } from 'esbuild'
+import { build, context, type BuildResult } from 'esbuild'
 import { createHash } from 'node:crypto'
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { spawn } from 'node:child_process'
-import { renderHtml } from '../src/template'
+import { spawn, type ChildProcess } from 'node:child_process'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
-const watch = process.argv.includes('--watch')
+const isDev = process.argv.includes('--dev')
 
 function hash(buf: Buffer | string) {
   return createHash('sha256').update(buf).digest('hex').slice(0, 10)
 }
 
-async function buildTailwind() {
+// In dev mode we use stable names (no hash) so wrangler picks up changes.
+// In prod we hash for cache-busting.
+function assetName(base: string, ext: string, buf?: Buffer | string) {
+  if (isDev) return `${base}.${ext}`
+  return `${base}.${hash(buf!)}.${ext}`
+}
+
+async function buildTailwind(watchMode = false) {
+  const args = [
+    'tailwindcss',
+    '-i', 'src/styles/tailwind.css',
+    '-o', join(dist, 'assets', isDev ? 'style.css' : '_tw_tmp.css'),
+    ...(isDev ? [] : ['--minify']),
+    ...(watchMode ? ['--watch'] : []),
+  ]
+  const p = spawn('npx', args, { stdio: 'inherit', cwd: root })
+  if (watchMode) return p
   return new Promise<void>((res, rej) => {
-    const p = spawn(
-      'npx',
-      [
-        'tailwindcss',
-        '-i', 'src/styles/tailwind.css',
-        '-o', join(dist, '_tw.css'),
-        '--minify',
-      ],
-      { stdio: 'inherit', cwd: root },
-    )
     p.on('exit', (c) => (c === 0 ? res() : rej(new Error(`tailwind exit ${c}`))))
   })
 }
 
-async function buildJs() {
-  const result = await build({
+async function buildJsProd() {
+  await build({
     entryPoints: [join(root, 'src/main.ts')],
     bundle: true,
     minify: true,
@@ -43,24 +48,23 @@ async function buildJs() {
     treeShaking: true,
     legalComments: 'none',
   })
-  if (result.errors.length) throw new Error('esbuild failed')
 }
 
-async function emitAssets() {
-  // Read tailwind output and the JS bundle, hash them, write to dist/assets/
-  const cssBuf = await readFile(join(dist, '_tw.css'))
+async function emitAssetsProd() {
+  const cssBuf = await readFile(join(dist, 'assets/_tw_tmp.css'))
   const jsBuf = await readFile(join(dist, '_tmp/main.js'))
-  const cssName = `style.${hash(cssBuf)}.css`
-  const jsName = `main.${hash(jsBuf)}.js`
-  await mkdir(join(dist, 'assets'), { recursive: true })
+  const cssName = assetName('style', 'css', cssBuf)
+  const jsName = assetName('main', 'js', jsBuf)
   await writeFile(join(dist, 'assets', cssName), cssBuf)
   await writeFile(join(dist, 'assets', jsName), jsBuf)
-  await rm(join(dist, '_tw.css'))
+  await rm(join(dist, 'assets/_tw_tmp.css'))
   await rm(join(dist, '_tmp'), { recursive: true, force: true })
   return { cssHref: `/assets/${cssName}`, jsHref: `/assets/${jsName}` }
 }
 
 async function emitHtml({ cssHref, jsHref }: { cssHref: string; jsHref: string }) {
+  // Dynamic import to pick up changes when re-rendering in dev.
+  const { renderHtml } = await import(`../src/template.ts?t=${Date.now()}`)
   const html = renderHtml({ cssHref, jsHref })
   await writeFile(join(dist, 'index.html'), html)
   await writeFile(join(dist, '404.html'), html)
@@ -87,35 +91,74 @@ async function copyPublic() {
 }
 
 async function emitSitemapAndRobots() {
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://aher.vet</loc>
-    <priority>1</priority>
-  </url>
-</urlset>
-`
-  await writeFile(join(dist, 'sitemap.xml'), sitemap)
+  await writeFile(
+    join(dist, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://aher.vet</loc>\n    <priority>1</priority>\n  </url>\n</urlset>\n`,
+  )
   await writeFile(
     join(dist, 'robots.txt'),
     'User-agent: *\nAllow: /\nSitemap: https://aher.vet/sitemap.xml\n',
   )
 }
 
-async function runOnce() {
+// ----- PROD -----
+async function buildProd() {
   await rm(dist, { recursive: true, force: true })
-  await mkdir(dist, { recursive: true })
+  await mkdir(join(dist, 'assets'), { recursive: true })
   await copyPublic()
-  await Promise.all([buildTailwind(), buildJs()])
-  const refs = await emitAssets()
+  await Promise.all([buildTailwind(), buildJsProd()])
+  const refs = await emitAssetsProd()
   await emitHtml(refs)
   await emitSitemapAndRobots()
   console.log('Built ->', dist)
 }
 
-if (watch) {
-  await runOnce()
-  console.log('Watching src/ and public/ — re-run `npm run build` to rebuild.')
+// ----- DEV -----
+async function buildDev() {
+  await rm(dist, { recursive: true, force: true })
+  await mkdir(join(dist, 'assets'), { recursive: true })
+  await copyPublic()
+  await emitSitemapAndRobots()
+
+  const devRefs = { cssHref: '/assets/style.css', jsHref: '/assets/main.js' }
+  await emitHtml(devRefs)
+
+  // Tailwind in watch mode — writes directly to dist/assets/style.css
+  buildTailwind(true)
+
+  // Esbuild watch — writes to dist/assets/main.js, rebuilds HTML on change
+  const ctx = await context({
+    entryPoints: [join(root, 'src/main.ts')],
+    bundle: true,
+    format: 'esm',
+    target: 'es2022',
+    platform: 'browser',
+    outfile: join(dist, 'assets/main.js'),
+    write: true,
+    treeShaking: true,
+    sourcemap: true,
+    plugins: [
+      {
+        name: 'rebuild-html',
+        setup(build) {
+          build.onEnd(async () => {
+            await emitHtml(devRefs)
+            console.log(`[dev] rebuilt ${new Date().toLocaleTimeString()}`)
+          })
+        },
+      },
+    ],
+  })
+  await ctx.watch()
+
+  // Wrangler dev
+  spawn('npx', ['wrangler', 'dev'], { stdio: 'inherit', cwd: root })
+
+  console.log('[dev] watching src/ for changes...')
+}
+
+if (isDev) {
+  await buildDev()
 } else {
-  await runOnce()
+  await buildProd()
 }

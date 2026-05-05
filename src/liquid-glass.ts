@@ -70,9 +70,9 @@ export function mountLiquidGlassFilter(
   const {
     width = 280,
     height = 360,
-    edgeRatio = 0.10,
-    strength = 0.75,
-    scale = 40,
+    edgeRatio = 0.20,
+    strength = 1,
+    scale = 2,
     surface = 'convex',
   } = opts
 

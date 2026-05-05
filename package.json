@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsx scripts/build.ts",
-    "dev": "tsx scripts/build.ts && wrangler dev",
+    "dev": "tsx scripts/build.ts --dev",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },
