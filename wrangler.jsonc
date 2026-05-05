@@ -1,14 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "aher-vet",
-  "main": ".open-next/worker.js",
   "compatibility_date": "2025-04-15",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
-  "vars": {
-    "NEXT_PUBLIC_SITE_URL": "https://aher.vet"
+    "directory": "dist"
   }
 }
