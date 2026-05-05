@@ -96,7 +96,7 @@ export function renderHtml({ cssHref, jsHref }: { cssHref: string; jsHref: strin
 </head>
 <body class="bg-white dark:bg-black font-typewriter">
   <main class="flex-auto">
-    <section id="aboutme-section" class="relative h-[500vh]">
+    <section id="aboutme-section" class="relative h-[800vh]">
       <div class="sticky top-0 h-screen w-full overflow-hidden">
         <div class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4">
           <div class="pointer-events-auto mx-auto flex max-w-4xl flex-col items-center gap-16 text-center">

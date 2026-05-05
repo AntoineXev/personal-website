@@ -86,7 +86,9 @@ async function copyPublic() {
   )
   await writeFile(
     join(dist, '_headers'),
-    `/assets/*\n  Cache-Control: public,max-age=31536000,immutable\n/fonts/*\n  Cache-Control: public,max-age=31536000,immutable\n`,
+    isDev
+      ? `/assets/*\n  Cache-Control: no-cache\n`
+      : `/assets/*\n  Cache-Control: public,max-age=31536000,immutable\n/fonts/*\n  Cache-Control: public,max-age=31536000,immutable\n`,
   )
 }
 
@@ -126,14 +128,15 @@ async function buildDev() {
   // Tailwind in watch mode — writes directly to dist/assets/style.css
   buildTailwind(true)
 
-  // Esbuild watch — writes to dist/assets/main.js, rebuilds HTML on change
+  // Esbuild watch + serve — serves dist/ directly, always fresh
   const ctx = await context({
     entryPoints: [join(root, 'src/main.ts')],
     bundle: true,
     format: 'esm',
     target: 'es2022',
     platform: 'browser',
-    outfile: join(dist, 'assets/main.js'),
+    outdir: join(dist, 'assets'),
+    entryNames: '[name]',
     write: true,
     treeShaking: true,
     sourcemap: true,
@@ -150,11 +153,8 @@ async function buildDev() {
     ],
   })
   await ctx.watch()
-
-  // Wrangler dev
-  spawn('npx', ['wrangler', 'dev'], { stdio: 'inherit', cwd: root })
-
-  console.log('[dev] watching src/ for changes...')
+  const { host, port } = await ctx.serve({ servedir: dist })
+  console.log(`[dev] http://localhost:${port} — watching src/ for changes...`)
 }
 
 if (isDev) {

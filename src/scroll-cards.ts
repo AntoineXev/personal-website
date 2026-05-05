@@ -5,28 +5,22 @@ function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t
 }
 
-function clamp01(v: number) {
-  return v < 0 ? 0 : v > 1 ? 1 : v
+function clamp(v: number, min: number, max: number) {
+  return v < min ? min : v > max ? max : v
 }
 
-// Given section progress 0..1, return per-card { y, rotate, opacity }.
-// Mirrors useTransform mappings from the original AboutMeSection.
-function frame(cfg: CardConfig, p: number) {
-  const start = cfg.startPct
-  const end = Math.min(1, cfg.startPct + cfg.travelPct)
-  const fadeIn = start + (end - start) * 0.08
-  const fadeOut = end - (end - start) * 0.08
+// y = distance from center in vh, based on scroll progress.
+// Fade in/out when the card is near the viewport edges (±100vh).
+function frame(cfg: CardConfig, progress: number) {
+  const y = (progress - cfg.centerAt) * cfg.speed
 
-  const t = clamp01((p - start) / (end - start))
-  // y: -130vh → 130vh linearly between start and end (clamped outside)
-  const y = lerp(-130, 130, t)
+  // Rotation interpolated from y position relative to travel range
+  const t = clamp((y + 130) / 260, 0, 1)
   const rotate = lerp(cfg.rotateStart, cfg.rotateEnd, t)
 
-  let opacity: number
-  if (p <= start || p >= end) opacity = 0
-  else if (p < fadeIn) opacity = (p - start) / (fadeIn - start)
-  else if (p > fadeOut) opacity = (end - p) / (end - fadeOut)
-  else opacity = 1
+  // Fade based on y: fully visible when |y| < 80vh, fades out approaching ±120vh
+  const absY = Math.abs(y)
+  const opacity = absY > 120 ? 0 : absY > 80 ? 1 - (absY - 80) / 40 : 1
 
   return { y, rotate, opacity }
 }

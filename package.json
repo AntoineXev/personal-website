@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsx scripts/build.ts",
     "dev": "tsx scripts/build.ts --dev",
+    "dev:wrangler": "npm run build && wrangler dev",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },

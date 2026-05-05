@@ -4,8 +4,10 @@ export type CardConfig = {
   scale: number
   rotateStart: number
   rotateEnd: number
-  startPct: number
-  travelPct: number
+  /** Scroll progress (0–1) when the card crosses the center of the viewport (y = 0). */
+  centerAt: number
+  /** How many vh the card moves per unit of scroll progress. Higher = faster fall. */
+  speed: number
 }
 
 export type GalleryItem = {
@@ -21,14 +23,11 @@ export const gallery: GalleryItem[] = [
   { title: 'Nature', subtitle: "J'aime bien les balades", image: '/images/mer.jpeg' },
 ]
 
-// xPct       : horizontal anchor (% of stage width), distinct desktop/mobile
-// scale      : depth-effect size variation
-// rotate*    : rotation in degrees at start / end of fall
-// startPct   : when (in section progress 0..1) the card begins falling
-// travelPct  : how long the fall takes (smaller = faster card)
+// centerAt : scroll progress when the card is at y=0 (center of viewport)
+// speed    : vh per scroll-progress unit (260 = crosses full viewport in ~0.4 progress)
 export const cardConfigs: CardConfig[] = [
-  { xPctDesktop: 14, xPctMobile: 4, scale: 0.95, rotateStart: -7, rotateEnd: 5, startPct: 0.4, travelPct: 0.45 },
-  { xPctDesktop: 36, xPctMobile: 53, scale: 1.0, rotateStart: 4, rotateEnd: -3, startPct: 0.3, travelPct: 0.65 },
-  { xPctDesktop: 58, xPctMobile: 4, scale: 0.88, rotateStart: -3, rotateEnd: 6, startPct: 0.15, travelPct: 0.75 },
-  { xPctDesktop: 74, xPctMobile: 53, scale: 0.92, rotateStart: 6, rotateEnd: -4, startPct: 0.05, travelPct: 0.95 },
+  { xPctDesktop: 14, xPctMobile: 4, scale: 0.95, rotateStart: -7, rotateEnd: 5, centerAt: 0.20, speed: 750 },
+  { xPctDesktop: 36, xPctMobile: 36, scale: 1.0, rotateStart: 4, rotateEnd: -3, centerAt: 0.55, speed: 600 },
+  { xPctDesktop: 58, xPctMobile: 23, scale: 0.88, rotateStart: -3, rotateEnd: 6, centerAt: 0.35, speed: 650 },
+  { xPctDesktop: 74, xPctMobile: 48, scale: 0.92, rotateStart: 6, rotateEnd: -4, centerAt: 0.75, speed: 700 },
 ]
