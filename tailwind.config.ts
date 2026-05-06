@@ -1,12 +1,8 @@
-import typographyPlugin from '@tailwindcss/typography'
 import { type Config } from 'tailwindcss'
 
-import typographyStyles from './typography'
-
 export default {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/**/*.{ts,html}'],
   darkMode: 'class',
-  plugins: [typographyPlugin],
   theme: {
     fontSize: {
       xs: ['0.8rem', { lineHeight: '1rem' }],
@@ -24,7 +20,9 @@ export default {
       '9xl': ['10rem', { lineHeight: '1' }],
     },
     fontFamily: {
-      'sans': [
+      typewriter: ['"Courier Prime"', 'ui-monospace', 'monospace'],
+      handwritten: ['Ballet', 'cursive'],
+      sans: [
         '"Inter"',
         'system-ui',
         '-apple-system',
@@ -33,20 +31,9 @@ export default {
         'Roboto',
         '"Helvetica Neue"',
         'Arial',
-        '"Noto Sans"',
         'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
       ],
-      'serif': [
-        'Georgia',
-        'Times New Roman',
-        'Times',
-        'serif',
-      ],
+      serif: ['Georgia', 'Times New Roman', 'Times', 'serif'],
     },
-    typography: typographyStyles,
   },
 } satisfies Config
